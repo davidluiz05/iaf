@@ -1,0 +1,18 @@
+.messageadduser-page{
+    ion-searchbar{ 
+        background: $thirdColor !important;        
+
+        .searchbar-input{
+            background-color: $fifthColor;
+            box-shadow: none !important;
+            color: $primaryColor;
+        }
+    }
+
+    ion-list{
+        ion-item{
+            border: none !important;
+            background-color: transparent;
+        }
+    }
+}

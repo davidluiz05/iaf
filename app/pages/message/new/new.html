@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button (click)="goBack()">
+                <ion-icon primary name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>New Message</ion-title>
+        <ion-buttons right>
+            <button (click)="goToAddUserPage()">
+                <ion-icon primary name="person-add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="newmessage-page">    
+    <ion-item>
+        <ion-label>All Applicants</ion-label>
+        <ion-checkbox [(ngModel)]="isAll"></ion-checkbox>
+    </ion-item>
+    <ion-list>
+        <ion-list-header>
+            For
+        </ion-list-header>
+        <ion-item *ngFor="let user of userlist">
+            <ion-avatar item-left>
+                <img src="img/user.png">
+            </ion-avatar>
+            <h2 secondary>
+                {{user.first_name}} {{user.last_name}}
+            </h2>            
+            <button item-right clear (click)="deleteCandidate(user)">
+                <ion-icon primary name="close"></ion-icon>
+            </button>
+        </ion-item>        
+    </ion-list>    
+</ion-content>
+<ion-footer>
+    <ion-list>
+        <ion-item class="send-input-container">        
+            <input type="text" [(ngModel)]="content" name="content" placeholder="Type here...">
+            <button item-right primary clear (click)="sendMessage()">
+                <ion-icon name="send" item-right></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
+</ion-footer>

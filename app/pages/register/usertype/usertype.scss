@@ -1,0 +1,29 @@
+.register-usertype-page{
+    .usertype-container{        
+        ion-item{
+            border: none !important;
+            background-color: transparent;
+
+            .item-inner{
+                border: none !important;
+
+                ion-label{
+                    font-family: 'PTSans-Regular';
+                }
+            }
+        }
+
+        ion-item.active{
+            background-color: $secondColor !important;
+
+            ion-label{
+                color: white;
+            }
+        }        
+    }
+
+    .next-btn-container{
+        margin-left: 15px;
+        margin-right: 15px;
+    }   
+}

@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button primary>
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="resetpass-page">
+    <h1 primary>
+        Reset your password
+    </h1>
+    <br>
+    <br>
+    <form (ngSubmit)="doResetPassword()">
+    <ion-list>
+        <ion-item class="app-input-container">
+            <ion-icon name="key" item-left></ion-icon>
+            <input type="password" placeholder="Please enter your password" [(ngModel)]="data.password" name="password">
+        </ion-item>
+        <br>
+        <ion-item class="app-input-container">
+            <ion-icon name="key" item-left></ion-icon>
+            <input type="password" placeholder="please enter confirm" [(ngModel)]="data.password_confirmation" name="confirm">
+        </ion-item>
+    </ion-list>
+    <br>
+    <button block secondary type="submit">
+        SAVE
+    </button>
+    </form>
+    <div class="block-back-container">
+        <div class="block-back"></div>
+    </div>
+</ion-content>

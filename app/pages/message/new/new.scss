@@ -1,0 +1,34 @@
+.newmessage-page{
+    ion-item{
+        background-color: transparent;
+        .item-inner{
+            border-bottom: none !important;            
+            font-family: 'PTSans-Regular';           
+        }
+    }
+
+    ion-list{
+        ion-list-header{
+            ion-label{
+                color: $primaryColor;
+            }
+        }
+
+        ion-item{
+            border:none !important;
+        }
+    }
+}
+
+ion-footer{
+    ion-list{
+        margin-bottom: 0 !important;
+        ion-item.send-input-container{
+            input{
+                border: none !important;
+                width: 100%;
+                font-family: 'PTSans-Regular';
+            }
+        }
+    }    
+}

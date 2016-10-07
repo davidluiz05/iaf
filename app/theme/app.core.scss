@@ -1,0 +1,193 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Shared Imports
+// --------------------------------------------------
+// These are the imports which make up the design of this app.
+// By default each design mode includes these shared imports.
+// App Shared Sass variables belong in app.variables.scss.
+@font-face{
+    font-family: 'PTSans-Regular';
+    src: url(../fonts/PT_Sans-Narrow-Web-Regular.ttf);
+}
+
+@font-face{
+    font-family: 'PTSans-Bold';
+    src: url(../fonts/PT_Sans-Narrow-Web-Bold.ttf);
+}
+
+@font-face{
+    font-family: 'LemonMilk';
+    src: url(../fonts/LemonMilk.otf);
+}
+
+ion-title{
+    .toolbar-title{
+         font-family: 'PTSans-Regular';
+         color: $primaryColor;
+    }    
+}
+
+ion-content{
+    background-color: $thirdColor;
+    position: relative;
+
+    h1{
+        text-align: center;
+        font-family: 'PTSans-Regular';        
+    }
+
+    button{
+        font-family: 'PTSans-Regular';
+    }
+}
+
+ion-list{
+    ion-item.app-input-container{
+        background-color: transparent !important;
+        border:2px solid $primaryColor !important;
+
+        .item-inner{
+            border-bottom: none !important;
+
+            input, select{
+                width: 100%;
+                border: none !important;
+                background-color: transparent !important;
+                font-family: 'PTSans-Regular';
+            }
+
+            input::-webkit-input-placeholder{
+                color: $secondColor !important;
+                font-family: 'PTSans-Regular';
+            }
+        }        
+    }
+
+    ion-item.app-checkbox-container{
+        padding-left: 0px !important;
+        background-color: transparent;
+        border-bottom: none !important;
+
+        .item-inner{
+            ion-label{
+                font-family: 'PTSans-Regular';
+                color: $primaryColor;
+                text-align: right;
+            }
+
+            button{
+                margin: 0 !important;
+            }            
+        }
+    }
+}
+
+//remove header border-bottom line and background
+.toolbar-background{
+    border: none !important;
+    background: transparent !important;
+}
+
+//effect background white
+.block-back-container{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    overflow: hidden;
+
+    .block-back{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: white;
+        z-index: -1;
+        transform-origin: 100% 0;
+        transform: rotate(-8deg) scale(1.5);
+    }
+}
+
+//menu
+.sidemenu-header{
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    img{
+        width: 100px;
+        border-radius: 50px;
+        position: absolute;
+        left: 10px;
+        top: 20px;
+    }
+
+    h1{
+        line-height: 100px;
+        margin-left: 120px;
+        font-family: 'PTSans-Regular';
+        color: $primaryColor !important;
+    }
+}
+
+.sidemenu-content{
+    ion-list{
+        margin: 0 !important;
+        
+        button{
+            font-family: 'PTSans-Regular';
+            background-color: $forthColor !important;
+
+            .item-inner{
+                border: none !important;
+            }
+        }
+
+    }
+}
+
+.sidemenu-footer{
+    ion-list{
+        margin: 0 !important;
+
+        button{
+            border: none !important;
+        }
+    }
+}
+
+
+//alert customization
+.alert-head{
+    h2, h3{
+       font-family: 'PTSans-Regular';     
+    }
+
+    .alert-button-group{
+        button{
+            font-family: 'LemonMilk';
+        }
+    }
+}
+
+@import "../pages/login/login";
+@import "../pages/forgot/sendcode/sendcode";
+@import "../pages/forgot/verifycode/verifycode";
+@import "../pages/register/usertype/usertype";
+@import "../pages/register/step1/step1";
+@import "../pages/register/step2/step2";
+@import "../pages/home/home";
+@import "../pages/profile/profile";
+@import "../pages/profile/editprofile/editprofile";
+@import "../pages/message/list/list";
+@import "../pages/message/list/morepop/morepop";
+@import "../pages/message/chat/chat";
+@import "../pages/message/new/new";
+@import "../pages/message/adduser/adduser";
+@import "../pages/message/filter/filter";
+@import "../pages/post/post";
+@import "../pages/resource/resource";
+@import "../pages/magazine/magazine";
+@import "../pages/terms/terms";

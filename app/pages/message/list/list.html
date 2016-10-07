@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button (click)="goToNewMessagePage()">
+                <ion-icon secondary name="add"></ion-icon>
+            </button>
+            <button (click)="showPopup($event)">
+                <ion-icon primary name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Messages</ion-title>
+        <ion-buttons right>
+            <button (click)="openMenu()">
+                <ion-icon primary name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="messagelist-page">
+    <ion-list>
+        <ion-item-sliding *ngFor="let message of messagelist">
+            <ion-item (click)="goToChatPage(message.sender.id)">
+                <ion-avatar item-left>
+                    <img src="img/user.png">
+                </ion-avatar>
+                <p item-right>{{message.created_at | date:'H:m a'}}</p>
+                <h2 secondary>{{message.first_name}} {{message.last_name}}</h2>                
+                <p>That is sample</p>
+            </ion-item>
+            <ion-item-options side="right">
+                <button (click)="doArchive(message)">                    
+                    {{listmode==0?"ARCHIVE":"UNARCHIVE"}}
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>   
+</ion-content>

@@ -1,0 +1,27 @@
+.register-step1-page{
+    ion-grid{
+        ion-row{
+            ion-col{
+                .indicator-item{
+                    border-radius: 20px;
+                    padding: 10px 16px;                   
+                    color: $primaryColor;     
+                    font-size: 18px;               
+                }
+
+                .indicator-item.active{
+                    background-color: $secondColor;
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .step-container{
+        padding: 5px;
+    }
+
+    .app-nav{
+        color: $secondColor;
+    }
+}

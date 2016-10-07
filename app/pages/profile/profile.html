@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar hideBackButton="true" class="profile-navbar">
+        <ion-buttons left>
+            <button (click)="showPopup($event)">
+                <ion-icon primary name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons right>
+            <button (click)="openMenu()">
+                <ion-icon primary name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="profile-page">
+    <div class="image-container">
+        <img [src]="data.profile_image" (click)="setProfileImg()">
+    </div>
+    <h1 class="name">{{data.first_name}} {{data.last_name}}</h1>
+    <p class="more-info">
+        {{types[data.type]}} - {{data.additional_data.location.state}}, {{data.additional_data.location.city}}
+    </p>
+    <center>    
+        <button outline (click)="goToEditProfilePage()">
+            <ion-icon name="md-create"></ion-icon>
+        </button>
+    </center>
+    <p class="status-container">
+        Account Status
+    </p>
+    <div class="status-btn-container">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <button full [ngClass]="{'active': data.status==0}" (click)="changeStatus(0)">
+                        ACTIVE
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button full [ngClass]="{'active': data.status==1}" (click)="changeStatus(1)">
+                        DORMANT
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <div class="block-back-container">
+        <div class="block-back"></div>
+    </div>    
+</ion-content>

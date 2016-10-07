@@ -1,0 +1,14 @@
+.messageuserfilter-page{    
+    ion-item{
+         background-color: transparent;
+
+        .item-inner{
+            border-bottom: none !important;            
+            font-family: 'PTSans-Regular';      
+
+            ion-label{
+                white-space: inherit;
+            }     
+        }           
+    }    
+}

@@ -1,0 +1,62 @@
+.profile-page{
+    position: relative;
+    
+    .image-container{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+
+        img{
+            width: 120px;
+            border-radius: 60px;            
+        }
+    }
+
+    h1.name{
+        font-family: 'PTSans-Regular';
+        color: $primaryColor !important;
+        text-align: center;
+    }
+
+    p.more-info{
+         font-family: 'PTSans-Regular';
+         color: $primaryColor !important;
+         opacity: 0.8;
+         text-align: center;
+    }
+
+    .edit-btn-container{
+        text-align: center;
+    }
+
+    .status-container{
+        text-align: center;
+        font-family: 'PTSans-Regular';
+        color: $primaryColor !important;
+        margin-top: 50px;
+    }
+
+    .status-btn-container{
+        padding-left: 10px;
+        padding-right: 10px;
+
+        ion-grid{
+            ion-row{
+                ion-col{
+                    padding: 0 !important;
+
+                    button{
+                        font-family: 'PTSans-Regular';
+                        background-color: $forthColor;
+                        color: $primaryColor;
+                    }
+
+                    button.active{
+                        background-color: $secondColor;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}

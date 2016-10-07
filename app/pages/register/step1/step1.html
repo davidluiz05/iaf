@@ -1,0 +1,120 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button primary (click)="goBack()">
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="register-step1-page">
+    <form (ngSubmit)="doCreate()">
+    <ion-grid>
+        <ion-row>
+            <ion-col text-center>
+                <span class="indicator-item" [ngClass]="{'active': step==0}">1</span>
+            </ion-col>
+            <ion-col text-center>
+                <span class="indicator-item" [ngClass]="{'active': step==1}">2</span>
+            </ion-col>
+            <ion-col text-center>
+                <span class="indicator-item" [ngClass]="{'active': step==2}">3</span>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <br>    
+    <div class="step-container" *ngIf="step==0">
+        <h1 primary>Your Personal Information</h1>
+        <ion-list>
+            <ion-item class="app-input-container">                
+                <select [(ngModel)]="data.applicant_type" name="type">
+                    <optgroup label="Applicant Type">
+                        <option value="0">High School Student</option>
+                        <option value="1">Adult</option>
+                        <option value="2">Military</option>
+                    </optgroup>
+                </select>
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="First Name" [(ngModel)]="data.first_name" name="first_name">
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="Middel Name" [(ngModel)]="data.middle_name" name="middle_name">
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="Last Name" [(ngModel)]="data.last_name" name="last_name">
+            </ion-item>            
+        </ion-list>
+        <br>
+        <button block secondary (click)="nextStep()">
+            Next
+        </button>
+    </div>
+
+    <div class="step-container" *ngIf="step==1">
+        <h1 primary>Your Location</h1>
+        <ion-list>            
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="State" [(ngModel)]="data.state" name="state">
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="City" [(ngModel)]="data.city" name="city">
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="Zip" [(ngModel)]="data.zip" name="zip">
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <ion-icon primary name="md-navigate" item-right></ion-icon>
+                <input type="text" placeholder="Mailing address line" [(ngModel)]="data.address" name="address">
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="Phone" [(ngModel)]="data.phone" name="phone">
+            </ion-item>
+        </ion-list>
+        <br>
+        <button block secondary (click)="nextStep()">
+            Next
+        </button>
+    </div>
+
+    <div class="step-container" *ngIf="step==2">
+        <h1 primary>Your Login Information</h1>
+        <ion-list>            
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="Email address" [(ngModel)]="data.email" name="email" name="email">
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="Verify Email address" [(ngModel)]="data.email_confirmation" name="email_confirmation">
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <input type="password" placeholder="Password" [(ngModel)]="data.password" name="password">
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <input type="password" placeholder="Verify password" [(ngModel)]="data.password_confirmation" name="password_confirmation">
+            </ion-item>
+            <br>
+            <ion-item class="app-checkbox-container">
+                <ion-label>Agree with</ion-label>
+                <ion-checkbox [(ngModel)]="data.check_terms" name="check_terms"></ion-checkbox>
+                <button item-right secondary clear (click)="goToTermsPage()" type="button">
+                    TERMS AND CONDITIONS
+                </button>
+            </ion-item>                                                
+        </ion-list>             
+        <br>
+        <button block secondary type="submit">
+            Create an account
+        </button>        
+    </div>
+    </form>
+</ion-content>

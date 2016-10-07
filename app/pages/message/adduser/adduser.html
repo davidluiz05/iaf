@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button (click)="goBack()">
+                <ion-icon primary name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Add User</ion-title>
+        <ion-buttons right>
+            <button secondary (click)="goToFilterPage()">
+                Filter
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="messageadduser-page">
+    <ion-searchbar (ionInput)="searchuser($event)"></ion-searchbar>
+    <ion-list>        
+        <ion-item *ngFor="let user of users" (click)="adduser(user)">
+            <ion-avatar item-left>
+                <img src="img/user.png">
+            </ion-avatar>
+            <h2 secondary>
+                {{user.first_name}} {{user.last_name}}
+            </h2>
+            <button primary clear item-right>
+                ADD
+            </button>
+        </ion-item>        
+    </ion-list>
+</ion-content>

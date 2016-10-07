@@ -1,0 +1,38 @@
+<ion-content scroll="false" class="login-page">
+    <div class="block-1">
+        <div class="block1-back">
+        </div>
+        <img src="img/logo.png">       
+    </div>
+    <form (ngSubmit)="doLogin()">
+    <div class="block-2">
+        <ion-list>
+            <ion-item class="app-input-container">
+                <ion-icon primary name="person" item-left></ion-icon>                
+                <input type="text" placeholder="USERNAME" [(ngModel)]="loginData.email" name="email" autocapitalize="off">
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <ion-icon primary name="key" item-left></ion-icon>                
+                <input type="password" placeholder="PASSWORD" [(ngModel)]="loginData.password" name="password">
+            </ion-item>
+        </ion-list>
+    </div>
+    <div class="block-3">
+        <div class="block3-back"></div>        
+        <div class="left-btns-container">
+            <button primary [navPush]="registerPage">
+                CREATE AN ACCOUNT
+            </button>           
+            <button primary [navPush]="forgotPage">
+                FORGOT PASSWORD
+            </button>
+        </div>
+        <div class="login-btn-container">
+            <button clear type="submit">
+                LOGIN
+            </button>
+        </div>
+    </div>
+    </form>
+</ion-content>

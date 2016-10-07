@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button primary navPop>
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>                  
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="forgot-page">
+    <h1 primary>Recover your password</h1>
+    <br>
+    <br>
+    <form (ngSubmit)="doSend()">
+    <ion-list>
+        <ion-item class="app-input-container">
+            <ion-icon primary name="mail" item-left></ion-icon>            
+            <input type="email" placeholder="Please enter your email" [(ngModel)]="forgotData.email" name="email"/>
+        </ion-item>
+    </ion-list>
+    <br>
+    <button block secondary type="submit">
+        SEND
+    </button>
+    </form>
+    <div class="block-back-container">
+        <div class="block-back"></div>
+    </div>
+</ion-content>

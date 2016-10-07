@@ -1,0 +1,25 @@
+.messagelist-page{
+    ion-list{
+        ion-item-sliding{
+            background-color: $thirdColor !important;
+
+            ion-item{
+                border: none !important;  
+                background-color: transparent;
+
+                .item-inner{
+                    border-bottom: 1px solid $fifthColor !important;
+
+                    p{
+                        color: $sixthColor;
+                        font-family: 'PTSans-Regular';
+                    }
+
+                    h2{
+                        font-family: 'PTSans-Regular';
+                    }
+                }              
+            }
+        }
+    }
+}

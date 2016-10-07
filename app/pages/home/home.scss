@@ -1,0 +1,39 @@
+.home-page{
+    ion-list{
+        ion-item{
+            background-color: $forthColor !important;
+            border: none !important;
+
+            ion-label{
+                font-family: 'PTSans-Regular';
+                white-space: inherit !important;
+            }
+        }
+    }
+
+    .header-block{
+        position: relative;
+        .block1-back{
+            position: absolute;
+            width: 150%;
+            height: 200%;
+            left: -12%;
+            top: -111%;
+            background-color: white;
+            z-index: -1;
+            transform-origin: 50% 50%;
+            transform: rotate(-8deg);
+        }   
+
+        img{
+            width: 180px;
+            margin-left: 20px;            
+            margin-bottom: 40px;           
+        }
+    }
+}
+
+.home-navbar{
+    background-color: white !important;
+}
+

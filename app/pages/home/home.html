@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-navbar hideBackButton="true" class="home-navbar">
+        <ion-buttons right>
+            <button (click)="openMenu()">
+                <ion-icon primary name="menu"></ion-icon>
+            </button>
+        </ion-buttons>                  
+    </ion-navbar>    
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="home-page">
+    <div class="header-block">
+        <div class="block1-back">
+        </div>
+        <img src="img/logo.png">       
+    </div>
+    <ion-list>
+        <ion-item>
+            <ion-icon secondary name="mail" item-left></ion-icon>
+            <ion-label> 
+                You have 3 new messages
+            </ion-label>
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-icon secondary name="school" item-left></ion-icon>
+            <ion-label> 
+                3 new schools were added near you
+            </ion-label>
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-icon secondary name="document" item-left></ion-icon>
+            <ion-label> 
+                You haven't started an applican yet
+            </ion-label>
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-icon secondary name="folder-open" item-left></ion-icon>
+            <ion-label> 
+                Week in review, 3 new posts
+            </ion-label>
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-icon secondary name="alert" item-left></ion-icon>
+            <ion-label> 
+                10 Accounts need to be approved
+            </ion-label>
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-icon secondary name="logo-usd" item-left></ion-icon>
+            <ion-label> 
+                $2000 Today's donation
+            </ion-label>
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-icon secondary name="person" item-left></ion-icon>
+            <ion-label text-wrap> 
+                Please confirm the connection with 5 students
+            </ion-label>
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-icon secondary name="link" item-left></ion-icon>
+            <ion-label> 
+                Recently added scholarships near you
+            </ion-label>
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-icon secondary name="person" item-left></ion-icon>
+            <ion-label> 
+                15 Advertisers
+            </ion-label>
+        </ion-item>
+    </ion-list>
+    <button secondary block>
+        START AN APPLICANTION
+    </button>
+</ion-content>

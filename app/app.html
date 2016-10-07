@@ -1,0 +1,23 @@
+<ion-menu [content]="content" id="authenticated">
+    <ion-toolbar class="sidemenu-header">
+        <img [src]="data.profile_image" menuClose (click)="goToProfilePage()">
+        <h1 (click)="goToProfilePage()" menuClose>{{data.full_name}}</h1>
+    </ion-toolbar>
+    <ion-content class="sidemenu-content" overflow-scroll="false" scroll="true">
+        <ion-list>
+            <button  menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+                {{p.title}}
+            </button>
+        </ion-list>
+    </ion-content>
+    <ion-toolbar class="sidemenu-footer">
+        <ion-list>
+            <button menuClose ion-item (click)="logout()">
+                <ion-icon name="log-out"></ion-icon>
+                Sign Up
+            </button>
+        </ion-list>
+    </ion-toolbar>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
