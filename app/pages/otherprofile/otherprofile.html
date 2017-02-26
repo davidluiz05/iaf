@@ -1,0 +1,155 @@
+<ion-header>
+    <ion-navbar hideBackButton="true" class="profile-navbar">
+        <ion-buttons left>
+            <button (click)="goBack()">                
+                <ion-icon primary name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>             
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="profile-page" *ngIf="data">
+    <div class="image-container">
+        <img [src]="data.profile_image">
+    </div>
+    <h1 class="name">{{data.first_name}} {{data.last_name}}</h1>
+    <ion-grid>   
+        <p class="block-header" primary>Personal Information</p>     
+        <ion-row *ngIf="data.type==0">
+            <ion-col width-50 class="field">
+                User Type
+            </ion-col>
+            <ion-col width-50>
+                {{applicanttypes[data.additional_data.applicant_type]}}
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.type==1">
+            <ion-col width-50 class="field">
+                User Type
+            </ion-col>
+            <ion-col width-50>
+                {{types[data.type]}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Account Status
+            </ion-col>
+            <ion-col width-50>
+                {{accountstatus[data.status]}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Contact Email
+            </ion-col>
+            <ion-col width-50>
+                {{data.email}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Contact Phone
+            </ion-col>
+            <ion-col width-50>
+                {{data.phone}}
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.type!=5">
+            <ion-col width-50 class="field">
+                Mailing Address
+            </ion-col>
+            <ion-col width-50>
+                {{data.additional_data.location.address}}
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.type!=5">
+            <ion-col width-50 class="field">
+                City
+            </ion-col>
+            <ion-col width-50>
+                {{data.additional_data.location.city}}
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.type!=5">
+            <ion-col width-50 class="field">
+                State
+            </ion-col>
+            <ion-col width-50>
+                {{data.additional_data.location.state}}
+            </ion-col>
+        </ion-row>
+        <p class="block-header" primary *ngIf="data.type==1">College Information</p>
+        <ion-row *ngIf="data.type==1">
+            <ion-col width-50 class="field">
+                College Name
+            </ion-col>
+            <ion-col width-50>
+                {{data.additional_data.name}}
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.type==1">
+            <ion-col class="col-img">
+                <img [src]="data.additional_data.header_image?data.additional_data.header_image:'img/college.png'">
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.type==1">
+            <ion-col class="field">
+                College Description:
+            </ion-col>            
+        </ion-row>
+        <ion-row *ngIf="data.type==1&&data.additional_data.description">
+            <ion-col>
+                {{data.additional_data.description}}
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.type==1&&(data.status==1||data.status==3||data.status==0)">
+            <ion-col class="field">
+                Scholarship Programs Enrolled:
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.type==1&&data.additional_data.hssp_enrolled==1&&(data.status==1||data.status==3)">
+            <ion-col>
+                <ion-icon name="checkmark"></ion-icon>
+                High School Scholarship Program
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.type==1&&data.additional_data.asep_enrolled==1&&(data.status==1||data.status==3)">
+            <ion-col>
+                <ion-icon name="checkmark"></ion-icon>
+                Adult Skills Education Program(ASEP)
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.type==1&&data.additional_data.map_enrolled==1&&(data.status==1||data.status==3)">
+            <ion-col>
+                <ion-icon name="checkmark"></ion-icon>
+                Military Award Program(MAP)
+            </ion-col>
+        </ion-row>
+    </ion-grid>   
+     <ion-list no-lines *ngIf="data.status==0&&data.type==1">
+         <ion-item>
+             <ion-label>High School Scholarship Program</ion-label>
+             <ion-checkbox [(ngModel)]="hssp_enrolled"></ion-checkbox>
+         </ion-item>
+         <ion-item>
+             <ion-label>Adult Skills Education Program(ASEP)</ion-label>
+             <ion-checkbox [(ngModel)]="asep_enrolled"></ion-checkbox>
+         </ion-item>
+         <ion-item>
+             <ion-label>Military Award Program(MAP)</ion-label>
+             <ion-checkbox [(ngModel)]="map_enrolled"></ion-checkbox>
+         </ion-item>
+     </ion-list>
+     <br>
+     <button block secondary (click)="accept()" *ngIf="data.status==0">
+         Accept
+     </button>
+     <button block outline (click)="deny()" *ngIf="data.status==0">
+         Deny
+     </button>
+</ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

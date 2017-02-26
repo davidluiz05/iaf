@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-title>Create a Magazine</ion-title>
+        <ion-buttons left>
+            <button (click)="goBack()">
+                <ion-icon primary name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>        
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="magazinecreate-page">
+    <form (ngSubmit)="save()">
+        <center *ngIf="data.image_data">
+            <img [src]="data.image_data">
+        </center>
+        <button outline block primary (click)="saveCover()">
+            click to upload cover image of magazine
+        </button>
+        <br>
+        <button outline block primary (click)="savePDF()">
+            click to upload magazine(pdf)
+        </button>
+        <br>
+        <br>
+        <button secondary block type="submit">
+            Save
+        </button>
+    </form>
+</ion-content>

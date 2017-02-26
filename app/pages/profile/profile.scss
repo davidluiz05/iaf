@@ -25,8 +25,10 @@
          text-align: center;
     }
 
-    .edit-btn-container{
-        text-align: center;
+    .edit-btn{
+        border-radius: 50%;
+        width: 43px;
+        height: 43px;
     }
 
     .status-container{
@@ -58,5 +60,99 @@
                 }
             }
         }
+    }
+
+
+    ion-grid{
+        ion-row{
+            ion-col{
+                color: $primaryColor;
+                font-family: 'PTSans-Regular';
+            }
+
+            ion-col.col-img{
+                text-align: center;
+
+                img{
+                    width: 100px;
+                    border-radius: 50px;
+                }
+            }
+
+            .field{
+                color: $secondColor;
+                font-family: 'PTSans-Regular';
+            }
+        }
+
+        ion-row.btn-container{
+            ion-col{
+                padding: 0px;
+
+                button{
+                    border-radius: 0px;
+                }
+            }
+        }
+    }
+
+    p.block-header{
+        font-family: 'PTSans-Bold';
+        color: $primaryColor;
+        font-size: 19px;
+    }
+
+    ion-list{
+        ion-item{
+            background: transparent;
+
+            ion-label{
+                font-family: 'PTSans-Regular';
+            }
+        }
+    }
+
+    .step-container{
+        margin-top: 40px;       
+
+        ion-list{
+            ion-item{
+                background: transparent;
+                border: none;
+
+                ion-icon{
+                    color: transparent;
+                }
+
+                .item-inner{
+                    border: none;
+                    color: black;
+                    font-family: 'PTSans-Regular';
+                    text-align: center;
+
+                    ion-label{
+                        white-space: normal;
+                    }
+                }
+            }
+
+            ion-item.active{
+                background: $sixthColor;
+                ion-icon{
+                    color: white;
+                }
+
+                .item-inner{
+                    color: white;
+                }
+            }
+        }
+    }
+
+    p.note{
+        font-family: 'PTSans-bold';
+        color: $primaryColor;
+        font-size: 18px;
+        text-align: center;
     }
 }

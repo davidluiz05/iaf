@@ -1,0 +1,26 @@
+.application-list-page{
+    scroll-content{
+        border-top: none !important;
+
+        ion-list{
+            ion-item{
+                border: none !important;
+                background: none !important;
+
+                h2{
+                    font-family: 'PTSans-Regular';
+                }                
+
+                p{
+                    color: $primaryColor;
+                    font-family: 'PTSans-Regular';
+                }
+
+                .checkservey-btn{
+                    color: black;
+                    background: #ffff00;
+                }
+            }
+        }
+    }
+}

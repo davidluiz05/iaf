@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button (click)="goBack()">
+                <ion-icon primary name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>{{data.title}}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="post-page">
+    <p secondary>{{data.updated_at | date: 'MMM d, yyyy'}}</p>
+    <center>
+        <img [src]="data.image_url">
+    </center>
+    <p primary>
+        {{data.content}}
+    </p>
+</ion-content>

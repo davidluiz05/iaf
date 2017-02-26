@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">        
+        <ion-buttons left>
+            <button (click)="goBack()">
+                <ion-icon primary name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title></ion-title>        
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="scholarshipsingle-page">
+    <ion-grid *ngIf="scholarship">
+        <ion-row>
+            <ion-col width-33>
+                <img [src]="scholarship.header_image?scholarship.header_image:'img/college.png'">
+            </ion-col>
+            <ion-col width-66>
+                <p class="mark">Scholarships</p>
+                <p class="name">{{namelist[scholarship.availableto]}}</p>
+                <p class="collegename">{{scholarship.college.name}}</p>
+                <p class="collegelocation">{{scholarship.college.location.city}}, {{scholarship.college.location.state}}</p>                
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Status
+            </ion-col>
+            <ion-col width-50>
+                {{status[scholarship.status]}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Value
+            </ion-col>
+            <ion-col width-50>
+                $ {{scholarship.value}} tuition reduction
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Available to
+            </ion-col>
+            <ion-col width-50>
+                <span *ngFor="let p of scholarship.availableto">
+                    {{applicanttypes[p]}} &nbsp; 
+                </span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Start Date
+            </ion-col>
+            <ion-col width-50>
+                Jan 1, 2016
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Closing Date
+            </ion-col>
+            <ion-col width-50>
+                Dec 31, 2016
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <button secondary block (click)="startapplication()" *ngIf="canApply">
+        Apply Now
+    </button>
+
+    <p *ngIf="scholarship">
+        {{scholarship.college.description}}
+    </p>
+</ion-content>
+
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

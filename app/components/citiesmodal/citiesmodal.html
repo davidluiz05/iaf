@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-title>Choose a city</ion-title>
+        <ion-buttons left>
+            <button primary (click)="dismiss()">
+                Cancel
+            </button>
+        </ion-buttons>
+        <ion-buttons right>
+            <button secondary (click)="done()">
+                Done
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding class="citiesmodal-page">
+    <ion-searchbar [(ngModel)]="tag" (ionInput)="search($event)"></ion-searchbar>
+    <ion-list no-lines *ngIf="cities" [virtualScroll]="result">
+        <ion-item *virtualItem="let city" (click)="select(city)">
+            <ion-icon name="pin" primary item-left></ion-icon>
+            {{city.value}},  {{city.state}}
+            <ion-icon item-right name="checkmark" *ngIf="city==selected"></ion-icon>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

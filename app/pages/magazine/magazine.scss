@@ -1,14 +1,16 @@
 .magazine-page{
-    ion-card{
-        ion-card-content{
-            ion-card-title{
-                font-family: 'PTSans-Regular';
-                color: $primaryColor;
-            }
+    scroll-content{
+        border: none !important;
+
+        ion-card{
+            margin: 5px !important;
+            float: left;           
 
             p{
                 font-family: 'PTSans-Regular';
-            }
+                color: $secondColor;
+                text-align: center;
+            }          
         }
-    }
+    }    
 }

@@ -1,15 +1,61 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar hideBackButton="true">
         <ion-buttons right>
             <button secondary (click)="doSave()">
                 SAVE
             </button>
         </ion-buttons>
+        <ion-buttons left *ngIf="!first">
+            <button primary (click)="goBack()">
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
-</ion-header>
-<ion-content overflow-scroll="false" scroll="true" class="editprofile-page">
-    <ion-grid>
-        <ion-row>
+
+    <ion-grid class="custom-tab">
+        <ion-row *ngIf="data.type==0&&data.applicant_type!=1">
+            <ion-col width-25>
+                <button full  [ngClass]="{'active': step==0}" (click)="goToStep(0)">
+                    Personal<br>Information
+                </button>
+            </ion-col>
+            <ion-col width-25>
+                <button full  [ngClass]="{'active': step==1}" (click)="goToStep(1)">
+                    Location
+                </button>
+            </ion-col>
+            <ion-col width-25>
+                <button full  [ngClass]="{'active': step==2}" (click)="goToStep(2)">
+                    Login<br>Information
+                </button>
+            </ion-col>
+            <ion-col width-25>
+                <button full [ngClass]="{'active': step==3}" (click)="goToStep(3)" *ngIf="data.additional_data.applicant_type==0">
+                    High School
+                </button>
+                <button full [ngClass]="{'active': step==3}" (click)="goToStep(3)" *ngIf="data.additional_data.applicant_type==2">
+                    Military
+                </button>                
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="data.type==0&&data.applicant_type==1">
+            <ion-col width-33>
+                <button full  [ngClass]="{'active': step==0}" (click)="goToStep(0)">
+                    Personal<br>Information
+                </button>
+            </ion-col>
+            <ion-col width-33>
+                <button full  [ngClass]="{'active': step==1}" (click)="goToStep(1)">
+                    Location
+                </button>
+            </ion-col>
+            <ion-col width-33>
+                <button full  [ngClass]="{'active': step==2}" (click)="goToStep(2)">
+                    Login<br>Information
+                </button>
+            </ion-col>            
+        </ion-row>
+        <ion-row *ngIf="data.type==1">
             <ion-col width-25>
                 <button full  [ngClass]="{'active': step==0}" (click)="goToStep(0)">
                     Personal<br>Information
@@ -27,76 +73,360 @@
             </ion-col>
             <ion-col width-25>
                 <button full [ngClass]="{'active': step==3}" (click)="goToStep(3)">
-                    High School
+                    College<br>Information
+                </button>
+            </ion-col>         
+        </ion-row>
+        <ion-row *ngIf="data.type==2">
+            <ion-col width-33>
+                <button full  [ngClass]="{'active': step==0}" (click)="goToStep(0)">
+                    Personal<br>Information
                 </button>
             </ion-col>
+            <ion-col width-33>
+                <button full  [ngClass]="{'active': step==1}" (click)="goToStep(1)">
+                    High School<br>Information
+                </button>
+            </ion-col>
+            <ion-col width-33>
+                <button full  [ngClass]="{'active': step==2}" (click)="goToStep(2)">
+                    Login<br>Information
+                </button>
+            </ion-col>            
+        </ion-row>
+        <ion-row *ngIf="data.type==3 ||data.type==4">
+            <ion-col width-33>
+                <button full  [ngClass]="{'active': step==0}" (click)="goToStep(0)">
+                    Personal<br>Information
+                </button>
+            </ion-col>
+            <ion-col width-33>
+                <button full  [ngClass]="{'active': step==1}" (click)="goToStep(1)">
+                    Location
+                </button>
+            </ion-col>
+            <ion-col width-33>
+                <button full  [ngClass]="{'active': step==2}" (click)="goToStep(2)">
+                    Login<br>Information
+                </button>
+            </ion-col>            
+        </ion-row>
+        <ion-row *ngIf="data.type==5">
+            <ion-col width-50>
+                <button full  [ngClass]="{'active': step==0}" (click)="goToStep(0)">
+                    Personal<br>Information
+                </button>
+            </ion-col>            
+            <ion-col width-50>
+                <button full  [ngClass]="{'active': step==2}" (click)="goToStep(2)">
+                    Login<br>Information
+                </button>
+            </ion-col>            
         </ion-row>
     </ion-grid>
+</ion-header>
+<ion-content overflow-scroll="false" scroll="true" class="editprofile-page">    
     <div class="step-container" *ngIf="step==0">
         <ion-list>
-            <ion-item class="app-input-container">
-                <select [(ngModel)]="data.type" name="type">
-                    <optgroup label="Applicant Type">
-                        <option value="0">High School Student</option>
-                        <option value="1">Adult</option>
-                        <option value="2">Military</option>
-                    </optgroup>
+            <p secondary *ngIf="data.type==0">Applicant Type:</p>
+            <ion-item class="app-input-container" *ngIf="data.type==0">
+                <select [(ngModel)]="data.applicant_type" name="applicant_type">                   
+                    <option value="0">High School Student</option>
+                    <option value="1">Adult</option>
+                    <option value="2">Military</option>                    
                 </select>
             </ion-item>
             <br>
+            <p secondary>First Name</p>
             <ion-item class="app-input-container">
                 <input type="text" placeholder="First Name" [(ngModel)]="data.first_name" name="first_name">
             </ion-item>
             <br>
+            <p secondary>Middle Name</p>
             <ion-item class="app-input-container">
                 <input type="text" placeholder="Middel Name" [(ngModel)]="data.middle_name" name="middle_name">
             </ion-item>
             <br>
+            <p secondary>Last Name</p>
             <ion-item class="app-input-container">
                 <input type="text" placeholder="Last Name" [(ngModel)]="data.last_name" name="last_name">
             </ion-item>
+            <br>            
+            <p secondary *ngIf="data.type==0">Gender</p>
+            <ion-grid *ngIf="data.type==0">
+                <ion-row>
+                    <ion-col>
+                        <button block [ngClass]="{'active': (data.gender==true)}" (click)="setgender(true)">
+                            Male
+                        </button>
+                    </ion-col>
+                    <ion-col>
+                        <button block [ngClass]="{'active': (data.gender==false)}" (click)="setgender(false)">
+                            Female
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <br *ngIf="data.type==0">
+            <p secondary>Phone number</p>
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="(XXX) XXX-XXXX" [(ngModel)]="data.phone" name="phone">
+            </ion-item>
+            <br>            
+            <div *ngIf="data.type==0">
+                <p secondary>Program of Study</p>
+                <ion-item class="app-input-container">
+                    <select [(ngModel)]="data.program_id">
+                        <option value="0">Program1</option>
+                        <option value="1">Program2</option>
+                    </select>
+                </ion-item>
+                <br>
+                <p secondary>Type of Program</p>
+                <ion-item class="app-input-container">
+                    <select [(ngModel)]="data.program_type">
+                        <option value="0">Certificate</option>
+                        <option value="1">Associates</option>
+                        <option value="1">Bachelors</option>
+                        <option value="2">Others</option>
+                    </select>
+                </ion-item>
+                <br>
+                <p secondary>Projected Start</p>
+                <ion-item class="app-input-container">
+                    <ion-datetime displayFormat="YYYY MMM" max="2100" pickerFormat="YYYY-MM-DD" [(ngModel)]="data.projected_start" name="projected_start"></ion-datetime>
+                </ion-item>
+                <br>
+                <p secondary>Projected Graduation</p>
+                <ion-item class="app-input-container">
+                    <ion-datetime displayFormat="YYYY MMM" max="2100" pickerFormat="YYYY-MM-DD" [(ngModel)]="data.projected_graduation" name="projected_graduation"></ion-datetime>
+                </ion-item>
+                <br>
+                <div *ngIf="data.applicant_type==0">
+                    <p secondary>Parent / Guardion First Name</p>
+                    <ion-item class="app-input-container">
+                        <input type="text" placeholder="First Name" [(ngModel)]="data.guardion_first_name" name="guardion_first_name">
+                    </ion-item>
+                    <br>
+                    <p secondary>Parent / Guardion Last Name</p>
+                    <ion-item class="app-input-container">
+                        <input type="text" placeholder="Last Name" [(ngModel)]="data.guardion_last_name" name="guardion_last_name">
+                    </ion-item>
+                    <br>
+                    <p secondary>Parent / Guardion Email</p>
+                    <ion-item class="app-input-container">
+                        <input type="text" placeholder="Parents of Guardion Email" [(ngModel)]="data.guardion_email" name="guardion_email">
+                    </ion-item>
+                </div>
+                <div *ngIf="data.applicant_type==1">
+                    <p secondary>Do you have High School Diploma or GED?</p>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>
+                                <button block [ngClass]="{'active': (data.have_highschool==true)}" (click)="sethavehighschool(true)">
+                                    Yes
+                                </button>
+                            </ion-col>
+                            <ion-col>
+                                <button block [ngClass]="{'active': (data.have_highschool==false)}" (click)="sethavehighschool(false)">
+                                    No
+                                </button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                    <br>
+                    <p secondary>Graduation Year</p>
+                    <ion-item class="app-input-container">
+                        <ion-datetime displayFormat="YYYY" pickerFormat="YYYY-MM-DD" max="2100" [(ngModel)]="data.highschool_graduation" name="highschool_graduation"></ion-datetime>
+                    </ion-item>
+                </div>
+            </div>
         </ion-list>
     </div>
-    <div class="step-container" *ngIf="step==1">        
-        <ion-list>            
-            <ion-item class="app-input-container">
-                <input type="text" placeholder="State" [(ngModel)]="data.state" name="state">
+    <div class="step-container" *ngIf="step==1&&data.type!=2">        
+        <ion-list>
+            <p secondary>State</p>            
+            <ion-item class="app-input-container" (click)="showstatedlg()">                
+                <ion-label>{{data.state}}</ion-label>
             </ion-item>
             <br>
-            <ion-item class="app-input-container">
-                <input type="text" placeholder="City" [(ngModel)]="data.city" name="city">
+            <p secondary>City</p>
+            <ion-item class="app-input-container">                
+                <input type="text"  [(ngModel)]="data.city" name="city">
             </ion-item>
             <br>
+            <p secondary>Zip</p>
             <ion-item class="app-input-container">
                 <input type="text" placeholder="Zip" [(ngModel)]="data.zip" name="zip">
             </ion-item>
             <br>
+            <p secondary>Address</p>
             <ion-item class="app-input-container">
                 <input type="text" placeholder="Mailing address line" [(ngModel)]="data.address" name="address">
+            </ion-item>            
+        </ion-list>        
+    </div>
+    <div class="step-container" *ngIf="step==1&&data.type==2">        
+        <ion-list>
+            <p secondary>School Name</p>
+            <ion-item class="app-input-container" (click)="showstatedlg()">
+                <ion-label>{{data.school_name}}</ion-label>
+            </ion-item>
+            <p secondary>State</p>            
+            <ion-item class="app-input-container" (click)="showstatedlg()">                
+                <ion-label>{{data.state}}</ion-label>
             </ion-item>
             <br>
-            <ion-item class="app-input-container">
-                <input type="text" placeholder="Phone" [(ngModel)]="data.phone" name="phone">
+            <p secondary>City</p>
+            <ion-item class="app-input-container">                
+                <input type="text"  [(ngModel)]="data.city" name="city">
             </ion-item>
+            <br>
+            <p secondary>Zip</p>
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="Zip" [(ngModel)]="data.zip" name="zip">
+            </ion-item>
+            <br>
+            <p secondary>Address</p>
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="Mailing address line" [(ngModel)]="data.address" name="address">
+            </ion-item>            
         </ion-list>        
     </div>
     <div class="step-container" *ngIf="step==2">        
-        <ion-list>            
+        <ion-list>       
+            <p secondary>Email</p>    
             <ion-item class="app-input-container">
                 <input type="text" placeholder="Email address" [(ngModel)]="data.email" name="email">
             </ion-item>
             <br>
+            <p secondary>Confirm Email</p>
             <ion-item class="app-input-container">
                 <input type="text" placeholder="Verify Email address" [(ngModel)]="data.email_confirmation" name="email_confirmation">
             </ion-item>
             <br>
+            <p secondary>Password</p>
             <ion-item class="app-input-container">
                 <input type="password" placeholder="Password" [(ngModel)]="data.password" name="password">
             </ion-item>
             <br>
+            <p secondary>Confirm Password</p>
             <ion-item class="app-input-container">
                 <input type="password" placeholder="Verify password" [(ngModel)]="data.password_confirmation" name="password_confirmation">
             </ion-item>                        
         </ion-list>        
     </div>
+    <div class="step-container" *ngIf="step==3"> 
+        <div *ngIf="data.type==0">       
+            <div *ngIf="data.additional_data.applicant_type==2">
+                <ion-list>
+                    <p secondary>Branch of Service</p>
+                    <ion-item class="app-input-container">
+                        <select [(ngModel)]="data.branch_service">
+                            <optgroup label="Branch of service">                            
+                                <option>U.S. Air National Guard</option>
+                                <option>U.S. Army National Guard</option>
+                                <option>U.S. Air Force</option>
+                                <option>U.S. Army</option>
+                                <option>U.S. Coast Guard</option>
+                                <option>U.S. Marine Corps</option>
+                                <option>U.S. Navy</option>
+                            </optgroup>
+                        </select>
+                    </ion-item>
+                    <br>
+                    <p secondary>Military Status</p>
+                    <ion-item class="app-input-container">
+                        <select [(ngModel)]="data.military_status">                                                                            
+                            <option>Active Duty</option>
+                            <option>Reserves</option>
+                            <option>Honorably Discharged</option>                       
+                        </select>
+                    </ion-item>
+                    <br>
+                    <p secondary>Date of Discharge</p>
+                    <ion-item class="app-input-container">
+                        <ion-label secondary>Date of discharge</ion-label>
+                        <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="data.date_discharge"></ion-datetime>
+                    </ion-item>
+                </ion-list>
+            </div>
+            <div *ngIf="data.additional_data.applicant_type==0 || data.additional_data.applicant_type==1">            
+                <button block outline (click)="showSchoolSelectDlg()">
+                    <ion-icon name="school" item-left></ion-icon>
+                    Click here to select your high school
+                </button>
+                <br>
+                <h5 *ngIf="data.school_id" secondary>Your High School Information</h5>
+                <ion-list *ngIf="data.school_id">
+                    <ion-item class="app-input-container">
+                        <ion-label>{{data.school_name}}</ion-label>
+                    </ion-item>
+                    <br>
+                    <ion-item class="app-input-container">
+                        <ion-label>{{data.school_state}}</ion-label>
+                    </ion-item>
+                    <br>
+                    <ion-item class="app-input-container">
+                        <ion-label>{{data.school_city}}</ion-label>
+                    </ion-item>
+                    <br>
+                    <ion-item class="app-input-container">
+                        <ion-label>{{data.school_counselor}}</ion-label>
+                    </ion-item>
+                    <br>
+                    <ion-item class="app-input-container">
+                        <ion-label>{{data.school_phone}}</ion-label>
+                    </ion-item>
+                    <br>
+                    <ion-item class="app-input-container">
+                        <ion-label>{{data.school_email}}</ion-label>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+        <!-- college --->
+        <div *ngIf="data.type==1">
+            <p secondary>College Name</p>
+            <ion-list>
+                <ion-item class="app-input-container">
+                    <input type="text" [(ngModel)]="data.school_name">
+                </ion-item>
+            </ion-list>
+            <p secondary>College Logo</p>
+            <center>
+                <div class="college-logo" (click)="updatecollegelogo()">
+                    <img [src]="data.college_logo?data.college_logo:'img/college.png'">
+                </div>
+            </center>
+            <p secondary>Job Title</p>
+            <ion-list>
+                <ion-item class="app-input-container">
+                    <input type="text" [(ngModel)]="data.job_title">
+                </ion-item>
+            </ion-list>
+            <p secondary>College Description</p>
+            <textarea class="college-description" [(ngModel)]="data.college_description"></textarea>
+            <p secondary>Scholarhsip Programs Enrolled:</p>
+            <ion-list no-lines>
+                <ion-item>
+                    <ion-label>High School Scholarship Program</ion-label>
+                    <ion-checkbox  disabled="true" [(ngModel)]="data.hssp_enrolled"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Adult Skills Education Program(ASEP)</ion-label>
+                    <ion-checkbox  disabled="true" [(ngModel)]="data.asep_enrolled"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Military Award Program(MAP)</ion-label>
+                    <ion-checkbox  disabled="true" [(ngModel)]="data.map_enrolled"></ion-checkbox>
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
 </ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

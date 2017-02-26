@@ -17,28 +17,59 @@
         <img [src]="data.profile_image" (click)="setProfileImg()">
     </div>
     <h1 class="name">{{data.first_name}} {{data.last_name}}</h1>
-    <p class="more-info">
+    <p class="more-info" *ngIf="data.type!=5">
         {{types[data.type]}} - {{data.additional_data.location.state}}, {{data.additional_data.location.city}}
     </p>
+    <p class="more-info" *ngIf="data.type==5">{{types[data.type]}}</p>
     <center>    
-        <button outline (click)="goToEditProfilePage()">
+        <button outline (click)="goToEditProfilePage()" class="edit-btn">
             <ion-icon name="md-create"></ion-icon>
         </button>
     </center>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <button outline primary icon-left block (click)="showCertificate()">
+                  <ion-icon name="ribbon"></ion-icon>
+                   View Certificate
+               </button>
+            </ion-col>
+            <ion-col>
+               <button outline primary icon-left block (click)="showLetterPage()">
+                   <ion-icon name="document"></ion-icon>
+                   View Award Letter
+               </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
     <p class="status-container">
         Account Status
-    </p>
+    </p>    
     <div class="status-btn-container">
-        <ion-grid>
+        <ion-grid *ngIf="data.type==0">
             <ion-row>
                 <ion-col>
-                    <button full [ngClass]="{'active': data.status==0}" (click)="changeStatus(0)">
+                    <button full [ngClass]="{'active': data.status==1}">
                         ACTIVE
                     </button>
                 </ion-col>
                 <ion-col>
-                    <button full [ngClass]="{'active': data.status==1}" (click)="changeStatus(1)">
+                    <button full [ngClass]="{'active': data.status==0}">
                         DORMANT
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid *ngIf="data.type!=0">
+            <ion-row>
+                <ion-col>
+                    <button full [ngClass]="{'active': data.status==1}">
+                        ACTIVE
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button full [ngClass]="{'active': data.status==0}">
+                        PENDING
                     </button>
                 </ion-col>
             </ion-row>
@@ -48,3 +79,8 @@
         <div class="block-back"></div>
     </div>    
 </ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

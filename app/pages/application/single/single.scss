@@ -1,0 +1,47 @@
+.application-single-page{    
+    .college-logo{
+        width: 100px;
+        border-radius: 50px;
+    }
+
+    .college-name{
+        font-family: 'PTSans-Regular';
+        color: $secondColor;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .college-info{
+        font-family: 'PTSans-Regular';
+        color: $primaryColor;
+        text-align: center;
+    }
+
+    p{
+        font-family: 'PTSans-Regular';
+        color: $primaryColor;
+    }
+
+    ion-grid{
+        padding: 0;
+        ion-row{
+            margin: 0;
+
+            ion-col{
+                margin: 0;
+                padding: 0;
+
+                button{
+                    border-radius: 0;
+                    background-color: $fifthColor;
+                    color: $primaryColor;
+                }
+
+                button.active{
+                    background-color: $secondColor;
+                    color: white;
+                }
+            }
+        }
+    }
+}

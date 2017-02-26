@@ -1,0 +1,98 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button (click)="goBack()">
+                <ion-icon primary name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>{{scholarshiptitle[scholarshiptype]}}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="profile-page">
+    <div *ngIf="data">
+    <div class="image-container">
+        <img [src]="data.profile_image">
+    </div>
+    <h1 class="name">
+        {{data.first_name}} {{data.last_name}}
+    </h1>
+    <ion-grid>
+        <p class="block-header" primary>Personal Information</p>
+        <ion-row>
+            <ion-col width-50 class="field">
+                User Type
+            </ion-col>
+            <ion-col width-50>
+                {{applicanttypes[data.additional_data.applicant_type]}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Account Status
+            </ion-col>
+            <ion-col>
+                {{accountstatus[data.status]}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Contact Email
+            </ion-col>
+            <ion-col width-50>
+                {{data.email}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Contact Phone
+            </ion-col>
+            <ion-col width-50>
+                {{data.phone}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                Mailing Address
+            </ion-col>
+            <ion-col width-50>
+                {{data.additional_data.location.address}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                City
+            </ion-col>
+            <ion-col width-50>
+                {{data.additional_data.location.city}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 class="field">
+                State
+            </ion-col>
+            <ion-col width-50>
+                {{data.additional_data.location.state}}
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <br>
+    <p class="block-header" *ngIf="scholarshiptype==1">Survey Answers</p>
+    <div *ngIf="scholarshiptype==1">
+        <div class="step-container" *ngFor="let qaentity of data.servey; let i = index">        
+            <p class="note">{{qaentity.qacontent.q}}</p>
+            <ion-list>
+                <ion-item *ngFor="let a of qaentity.qacontent.a; let j = index" [ngClass]="{'active': (qaentity.answer==j)}">
+                    {{a}}
+                </ion-item>
+            </ion-list>       
+        </div>
+    </div>
+    <br>
+    <button secondary block (click)="accept()" *ngIf="applicationstatus==2">
+        Accept
+    </button>
+    <button primary outline block (click)="deny()" *ngIf="applicationstatus==2">
+        Deny
+    </button>
+    </div>
+</ion-content>

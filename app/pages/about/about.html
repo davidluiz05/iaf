@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons right>
+            <button primary (click)="openMenu()">
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>About Us</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="about-page">
+    <ion-list>
+        <ion-item (click)="goToSeg1Page()">
+            <h2>About Imagine America Foundation</h2>
+        </ion-item>
+        <ion-item (click)="goToSeg2Page()">
+            <h2>Board of Directors</h2>
+        </ion-item>
+        <ion-item (click)="goToSeg3Page()">
+            <h2>Copyright Notice & Legal Disclaimer</h2>
+        </ion-item>
+        <ion-item (click)="goToSeg4Page()">
+            <h2>Privacy Policy</h2>
+        </ion-item>
+    </ion-list>
+</ion-content>

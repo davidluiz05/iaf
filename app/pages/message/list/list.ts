@@ -1,24 +1,23 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController, PopoverController, Events} from 'ionic-angular';
+import { Http } from '@angular/http';
+import { NavController, MenuController, PopoverController, Events, AlertController} from 'ionic-angular';
 import { ChatPage } from '../chat/chat';
 import { NewMessagePage } from '../new/new';
-import { MessageSearchrPage } from '../search/search';
 import { MorePopPage } from './morepop/morepop';
 import { API_URI } from '../../../providers/config';
 import { UserData } from '../../../providers/user-data';
-import { Http } from '@angular/http';
-import { Alert } from '../../../providers/alert';
+
 
 @Component({
     templateUrl: 'build/pages/message/list/list.html',
-    providers: [UserData, Alert]
+    providers: [UserData]
 })
 
 export class MessageListPage {
     listmode: number;   
     messagelist: Array<any>;
 
-    constructor(public navCtrl: NavController, public menuCtrl: MenuController, public popoverCtrl: PopoverController, public events: Events, public http: Http, public userData: UserData, public alert: Alert){
+    constructor(public navCtrl: NavController, public menuCtrl: MenuController, public popoverCtrl: PopoverController, public events: Events, public http: Http, public userData: UserData, public alertCtrl: AlertController){
         this.listmode = 0;
         this.events.subscribe('messagelist:viewmode', (data)=> {
             this.listmode = data[0];
@@ -28,16 +27,30 @@ export class MessageListPage {
     }
 
     getMessages(mode){
-        this.userData.getUserID().then((id) => {
+        this.userData.getUserData().then((data) => {
+            let d = JSON.parse(data);
+            console.log(d);
             this.http.post(API_URI + "getmessagelist", {
-                user_id: id,
+                user_id: d.id,
                 status: mode
             }).subscribe(res => {
                   if(res.json().status == false){
-                      this.alert.show("Failed", res.json().error);
+                      let alert = this.alertCtrl.create({
+                          title: "Failed",
+                          subTitle: res.json().error,
+                          buttons: ["OK"]
+                      });
+                      alert.present();
                   }else{
                       this.messagelist = res.json().messages;
                   }
+            }, err =>{
+                let alert = this.alertCtrl.create({
+                    title: "Failed",
+                    subTitle: "please check internet connection",
+                    buttons: ["OK"]
+                });
+                alert.present();
             });
         }); 
     }
@@ -50,11 +63,7 @@ export class MessageListPage {
 
     goToNewMessagePage(){
         this.navCtrl.push(NewMessagePage);
-    }
-
-    goToSearchPage(){
-        this.navCtrl.push(MessageSearchrPage);
-    }
+    }    
 
     openMenu(){
         this.menuCtrl.open();
@@ -68,16 +77,31 @@ export class MessageListPage {
     }
 
     doArchive(message){
-        this.http.post(API_URI + "markasread", {
-            id: message.id,
-            status: (this.listmode == 0?2:0)
-        }).subscribe(res => {
-            if(res.json().status == false){
-                this.alert.show("Failed", res.json().error);
-            }else{
-                let start = this.messagelist.indexOf(message);
-                this.messagelist.splice(start, 1);
-            }
+        this.userData.getUserData().then((data) => {
+            let d = JSON.parse(data);
+            this.http.post(API_URI + "markmessage", {
+                user_id: message.sender_id,
+                status: (this.listmode == 0?2:0)
+            }).subscribe(res => {
+                if(res.json().status == false){
+                    let alert =  this.alertCtrl.create({
+                        title: "Failed",
+                        subTitle: res.json().error,
+                        buttons: ["OK"]
+                    });
+                    alert.present();
+                }else{
+                    let start = this.messagelist.indexOf(message);
+                    this.messagelist.splice(start, 1);
+                }
+            }, err => {
+                let alert = this.alertCtrl.create({
+                    title: "Failed",
+                    subTitle: "please check internet connection",
+                    buttons: ["OK"]
+                });
+                alert.present();
+            });
         });
     }
 }

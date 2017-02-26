@@ -1,0 +1,271 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons right>
+            <button (click)="openMenu()">
+                <ion-icon primary name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Accounts</ion-title>
+    </ion-navbar>
+    <ion-grid class="custom-tab">
+        <ion-row>
+            <ion-col>
+                <button block [ngClass]="{'active' : (step==0)}" (click)="settab(0)">
+                    Pending
+                </button>
+            </ion-col>
+            <ion-col>
+                <button block [ngClass]="{'active': (step==1)}" (click)="settab(1)">
+                    Active
+                </button>
+            </ion-col>
+            <ion-col>
+                <button block [ngClass]="{'active': (step==2)}" (click)="settab(2)">
+                    Deny
+                </button>
+            </ion-col>
+            <ion-col>
+                <button block [ngClass]="{'active': (step==3)}" (click)="settab(3)">
+                    Deleted
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+<ion-content overflow-scroll="false" scroll="true" class="account-page">
+    <!-- Pendding Tab -->
+    <ion-list no-lines *ngIf="step==0&&accounts">
+        <p secondary *ngIf="accounts.penddingaccounts.admins.length!=0">IAF Admins</p>
+        <div *ngFor="let admin of accounts.penddingaccounts.admins">
+            <ion-item  *ngIf="admin.status==0" (click)="goToOtherProfilePage(admin.id)">
+                <ion-avatar item-left>
+                    <img [src]="admin.profile_image?admin.profile_image:'img/user.png'">                    
+                </ion-avatar>
+                <h2>{{admin.first_name}} {{admin.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.penddingaccounts.colleges.length!=0">College Admins</p>
+        <div *ngFor="let college of accounts.penddingaccounts.colleges">
+            <ion-item *ngIf="college.status==0" (click)="goToOtherProfilePage(college.id)">
+                <ion-avatar item-left>
+                    <img [src]="college.profile_image?college.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{college.first_name}} {{college.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.penddingaccounts.highschools.length!=0">High School Counselors</p>
+        <div *ngFor="let highschool of accounts.penddingaccounts.highschools">
+            <ion-item *ngIf="highschool.status==0" (click)="goToOtherProfilePage(highschool.id)">
+                <ion-avatar item-left>
+                    <img [src]="highschool.profile_image?highschool.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{highschool.first_name}} {{highschool.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.penddingaccounts.applicants.length!=0">Applicants</p>
+        <div *ngFor="let applicant of accounts.penddingaccounts.applicants">
+            <ion-item *ngIf="applicant.status==0" (click)="goToOtherProfilePage(applicant.id)">
+                <ion-avatar item-left>
+                    <img [src]="applicant.profile_image?applicant.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{applicant.first_name}} {{applicant.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.penddingaccounts.advertisers.length!=0">Advertisers</p>
+        <div *ngFor="let advertiser of accounts.penddingaccounts.advertisers">
+            <ion-item *ngIf="advertiser.status==0" (click)="goToOtherProfilePage(advertiser.id)">
+                <ion-avatar item-left>
+                    <img [src]="advertiser.profile_image?advertiser.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{advertiser.first_name}} {{advertiser.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.penddingaccounts.donors.length!=0">Donors</p>
+        <div *ngFor="let donor of accounts.penddingaccounts.donors">
+            <ion-item *ngIf="donor.status==0" (click)="goToOtherProfilePage(donor.id)">
+                <ion-avatar item-left>
+                    <img [src]="donor.profile_image?donor.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{donor.first_name}} {{donor.last_name}}</h2>
+            </ion-item>
+        </div>        
+    </ion-list>
+    <!-- Active Tab -->
+    <ion-list no-lines *ngIf="step==1&&accounts">
+        <p secondary *ngIf="accounts.activeaccounts.admins.length!=0">IAF Admins</p>
+        <div *ngFor="let admin of accounts.activeaccounts.admins">
+            <ion-item  *ngIf="admin.status==1" (click)="goToOtherProfilePage(admin.id)">
+                <ion-avatar item-left>
+                    <img [src]="admin.profile_image?admin.profile_image:'img/user.png'">                    
+                </ion-avatar>
+                <h2>{{admin.first_name}} {{admin.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.activeaccounts.colleges.length!=0">College Admins</p>
+        <div *ngFor="let college of accounts.activeaccounts.colleges">
+            <ion-item *ngIf="college.status==1" (click)="goToOtherProfilePage(college.id)">
+                <ion-avatar item-left>
+                    <img [src]="college.profile_image?college.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{college.first_name}} {{college.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.activeaccounts.highschools.length!=0">High School Counselors</p>
+        <div *ngFor="let highschool of accounts.activeaccounts.highschools">
+            <ion-item *ngIf="highschool.status==1" (click)="goToOtherProfilePage(highschool.id)">
+                <ion-avatar item-left>
+                    <img [src]="highschool.profile_image?highschool.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{highschool.first_name}} {{highschool.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.activeaccounts.applicants.length!=0">Applicants</p>
+        <div *ngFor="let applicant of accounts.activeaccounts.applicants">
+            <ion-item *ngIf="applicant.status==1" (click)="goToOtherProfilePage(applicant.id)">
+                <ion-avatar item-left>
+                    <img [src]="applicant.profile_image?applicant.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{applicant.first_name}} {{applicant.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.activeaccounts.advertisers.length!=0">Advertisers</p>
+        <div *ngFor="let advertiser of accounts.activeaccounts.advertisers">
+            <ion-item *ngIf="advertiser.status==1" (click)="goToOtherProfilePage(advertiser.id)">
+                <ion-avatar item-left>
+                    <img [src]="advertiser.profile_image?advertiser.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{advertiser.first_name}} {{advertiser.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.activeaccounts.donors.length!=0">Donors</p>
+        <div *ngFor="let donor of accounts.activeaccounts.donors">
+            <ion-item *ngIf="donor.status==0" (click)="goToOtherProfilePage(donor.id)">
+                <ion-avatar item-left>
+                    <img [src]="donor.profile_image?donor.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{donor.first_name}} {{donor.last_name}}</h2>
+            </ion-item>
+        </div>        
+    </ion-list>
+
+    <!-- Deny Tab -->
+    <ion-list no-lines *ngIf="step==2&&accounts">
+        <p secondary *ngIf="accounts.denyaccounts.admins.length!=0">IAF Admins</p>
+        <div *ngFor="let admin of accounts.denyaccounts.admins">
+            <ion-item  *ngIf="admin.status==2" (click)="goToOtherProfilePage(admin.id)">
+                <ion-avatar item-left>
+                    <img [src]="admin.profile_image?admin.profile_image:'img/user.png'">                    
+                </ion-avatar>
+                <h2>{{admin.first_name}} {{admin.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.denyaccounts.colleges.length!=0">College Admins</p>
+        <div *ngFor="let college of accounts.denyaccounts.colleges">
+            <ion-item *ngIf="college.status==2" (click)="goToOtherProfilePage(college.id)">
+                <ion-avatar item-left>
+                    <img [src]="college.profile_image?college.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{college.first_name}} {{college.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.denyaccounts.highschools.length!=0">High School Counselors</p>
+        <div *ngFor="let highschool of accounts.denyaccounts.highschools">
+            <ion-item *ngIf="highschool.status==2" (click)="goToOtherProfilePage(highschool.id)">
+                <ion-avatar item-left>
+                    <img [src]="highschool.profile_image?highschool.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{highschool.first_name}} {{highschool.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.denyaccounts.applicants.length!=0">Applicants</p>
+        <div *ngFor="let applicant of accounts.denyaccounts.applicants">
+            <ion-item *ngIf="applicant.status==2" (click)="goToOtherProfilePage(applicant.id)">
+                <ion-avatar item-left>
+                    <img [src]="applicant.profile_image?applicant.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{applicant.first_name}} {{applicant.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.denyaccounts.advertisers.length!=0">Advertisers</p>
+        <div *ngFor="let advertiser of accounts.denyaccounts.advertisers">
+            <ion-item *ngIf="advertiser.status==2" (click)="goToOtherProfilePage(advertiser.id)">
+                <ion-avatar item-left>
+                    <img [src]="advertiser.profile_image?advertiser.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{advertiser.first_name}} {{advertiser.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.denyaccounts.donors.length!=0">Donors</p>
+        <div *ngFor="let donor of accounts.denyaccounts.donors">
+            <ion-item *ngIf="donor.status==2" (click)="goToOtherProfilePage(donor.id)">
+                <ion-avatar item-left>
+                    <img [src]="donor.profile_image?donor.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{donor.first_name}} {{donor.last_name}}</h2>
+            </ion-item>
+        </div>        
+    </ion-list>
+
+    <!-- Deleted Tab -->
+    <ion-list no-lines *ngIf="step==3&&accounts">
+        <p secondary *ngIf="accounts.deletedaccounts.admins.length!=0">IAF Admins</p>
+        <div *ngFor="let admin of accounts.deletedaccounts.admins">
+            <ion-item  *ngIf="admin.status==3" (click)="goToOtherProfilePage(admin.id)">
+                <ion-avatar item-left>
+                    <img [src]="admin.profile_image?admin.profile_image:'img/user.png'">                    
+                </ion-avatar>
+                <h2>{{admin.first_name}} {{admin.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.deletedaccounts.colleges.length!=0">College Admins</p>
+        <div *ngFor="let college of accounts.deletedaccounts.colleges">
+            <ion-item *ngIf="college.status==3" (click)="goToOtherProfilePage(college.id)">
+                <ion-avatar item-left>
+                    <img [src]="college.profile_image?college.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{college.first_name}} {{college.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.deletedaccounts.highschools.length!=0">High School Counselors</p>
+        <div *ngFor="let highschool of accounts.deletedaccounts.highschools">
+            <ion-item *ngIf="highschool.status==3" (click)="goToOtherProfilePage(highschool.id)">
+                <ion-avatar item-left>
+                    <img [src]="highschool.profile_image?highschool.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{highschool.first_name}} {{highschool.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.deletedaccounts.applicants.length!=0">Applicants</p>
+        <div *ngFor="let applicant of accounts.deletedaccounts.applicants">
+            <ion-item *ngIf="applicant.status==3" (click)="goToOtherProfilePage(applicant.id)">
+                <ion-avatar item-left>
+                    <img [src]="applicant.profile_image?applicant.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{applicant.first_name}} {{applicant.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.deletedaccounts.advertisers.length!=0">Advertisers</p>
+        <div *ngFor="let advertiser of accounts.deletedaccounts.advertisers">
+            <ion-item *ngIf="advertiser.status==3" (click)="goToOtherProfilePage(advertiser.id)">
+                <ion-avatar item-left>
+                    <img [src]="advertiser.profile_image?advertiser.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{advertiser.first_name}} {{advertiser.last_name}}</h2>
+            </ion-item>
+        </div>
+        <p secondary *ngIf="accounts.deletedaccounts.donors.length!=0">Donors</p>
+        <div *ngFor="let donor of accounts.deletedaccounts.donors">
+            <ion-item *ngIf="donor.status==3" (click)="goToOtherProfilePage(donor.id)">
+                <ion-avatar item-left>
+                    <img [src]="donor.profile_image?donor.profile_image:'img/user.png'">
+                </ion-avatar>
+                <h2>{{donor.first_name}} {{donor.last_name}}</h2>
+            </ion-item>
+        </div>        
+    </ion-list>
+</ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

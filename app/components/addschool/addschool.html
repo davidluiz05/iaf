@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button secondary (click)="goBack()">
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Your High School Information</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="addschool-page">
+    <form (ngSubmit)="onSave()">
+        <ion-list>
+            <p secondary>High School Name</p>
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.schoolname" name="schoolname">
+            </ion-item>
+            <p secondary>State</p>
+            <ion-item class="app-input-container" (click)="showstatedlg()">
+                <ion-label>{{data.state}}</ion-label>
+            </ion-item>
+            <p secondary>City</p>
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.city" name="name">
+            </ion-item>
+            <p secondary>Your High School Counselor</p>
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.name" name="name">
+            </ion-item>
+            <p secondary>Counselor Phone</p>
+            <ion-item class="app-input-container">
+                <input type="number" [(ngModel)]="data.phone" name="phone">
+            </ion-item>
+            <p secondary>Counselor Email</p>
+            <ion-item class="app-input-container">
+                <input type="email" [(ngModel)]="data.email" name="email">
+            </ion-item>
+        </ion-list>
+        <button block secondary type="submit">
+            SAVE
+        </button>
+    </form>
+</ion-content>
+
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

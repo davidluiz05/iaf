@@ -16,43 +16,42 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content overflow-scroll="false" scroll="true" class="chat-page">
-    <ion-list>
-        <ion-item-divider class="you">
-            12:34 PM
-        </ion-item-divider>        
-        <ion-item class="you">
-            <ion-avatar item-left>
-            </ion-avatar>
-            <p>
-                Hello User name
-            </p>
-        </ion-item>
-        <ion-item class="you">
-            <ion-avatar item-left>
-                <img src="img/user.png">
-            </ion-avatar>
-            <p>
-                this is sample chat content
-            </p>
-        </ion-item>
-        <ion-item-divider class="me">
-            12:34 PM
-        </ion-item-divider>
-        <ion-item class="me">
-            <ion-avatar item-left>
-            </ion-avatar>
-            <p>
-                Hello User name
-            </p>
-        </ion-item>
+<ion-content overflow-scroll="false" scroll="false" class="chat-page">
+    <div angular2-auto-scroll="0" class="chatbox-container">
+    <ion-list [virtualScroll]="messagelist">        
+        <div *virtualItem="let message"> 
+            <ion-item-divider class="you" *ngIf="message.sender_id==sender_id">
+                {{message.created_at | date: 'H:m a'}}
+            </ion-item-divider> 
+            <ion-item-divider class="me" *ngIf="message.sender_id!=sender_id">
+                {{message.created_at | date: 'H:m a'}}
+            </ion-item-divider>      
+            <ion-item class="you" *ngIf="message.sender_id==sender_id">
+                <ion-avatar item-left>
+                    <img [src]="sender.profile_image?sender.profile_image:'img/user.png'">
+                </ion-avatar>
+                <p>
+                    {{message.content}}
+                </p>
+            </ion-item>
+            <ion-item class="me" *ngIf="message.sender_id!=sender_id">
+                <ion-avatar item-left>
+                </ion-avatar>
+                <p>
+                    {{message.content}}
+                </p>
+            </ion-item>
+        </div>        
     </ion-list>
+    </div>    
 </ion-content>
 <ion-footer>
-    <ion-item>        
-        <ion-input type="text"></ion-input>
-        <button item-right primary clear>
-            <ion-icon name="send"></ion-icon>
-        </button>
-    </ion-item>
+    <ion-list>
+        <ion-item class="send-input-container">        
+            <input type="text" placeholder="Type here..." [(ngModel)]="messagecontent">
+            <button item-right primary clear (click)="sendMessage()">
+                <ion-icon name="send"></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
 </ion-footer>

@@ -1,24 +1,12 @@
-.register-step1-page{
-    ion-grid{
-        ion-row{
-            ion-col{
-                .indicator-item{
-                    border-radius: 20px;
-                    padding: 10px 16px;                   
-                    color: $primaryColor;     
-                    font-size: 18px;               
-                }
-
-                .indicator-item.active{
-                    background-color: $secondColor;
-                    color: white;
-                }
-            }
-        }
-    }
+.register-step1-page{   
 
     .step-container{
         padding: 5px;
+
+        p{
+            font-family: 'PTSans-Regular';
+            margin-bottom: 5px !important;
+        }
     }
 
     .app-nav{

@@ -1,20 +1,18 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { NavController, NavParams,AlertController } from 'ionic-angular';
 import { ResetPasswordPage } from '../resetpass/resetpass';
-import { Alert } from '../../../providers/alert';
-import { Progress } from '../../../providers/loading';
 import { API_URI } from '../../../providers/config';
 
 @Component({
-    templateUrl: 'build/pages/forgot/verifycode/verifycode.html',
-    providers: [Alert, Progress]
+    templateUrl: 'build/pages/forgot/verifycode/verifycode.html'
 })
 
 export class VerifyCodePage {
     data: {email?: string, code?: string};
+    progress = false;
 
-    constructor(private navCtrl: NavController, private navParams: NavParams, private alertCtrl: Alert, private progress: Progress, private http: Http){
+    constructor(private navCtrl: NavController, private navParams: NavParams, private http: Http, public alertCrrl: AlertController){
         this.data = {
             email: this.navParams.get('email'),
             code: ''
@@ -22,16 +20,37 @@ export class VerifyCodePage {
     }    
 
     doSend(){
-        this.progress.show("");       
-        this.http.post(API_URI + "checkcode", this.data).subscribe(res => {
-            this.progress.dismiss();
+        this.showProgress();   
+        this.http.post(API_URI + "checkcode", this.data).subscribe(res => {  
+            this.hideProgress();          
             if(res.json().status == false){
-                this.alertCtrl.show("Failed", res.json().error);
+                let alert = this.alertCrrl.create({
+                    title: "Failed",
+                    subTitle: res.json().error,
+                    buttons: ["OK"]
+                });
+                alert.present();
             }else{
                 this.navCtrl.push(ResetPasswordPage, {
                     email: this.data.email
                 });
             }
+        }, err => {
+            this.hideProgress();
+            let alert = this.alertCrrl.create({
+                title: "Failed",
+                subTitle: "please check internet connection",
+                buttons: ["OK"]
+            });
+            alert.present();
         });        
-    }    
+    }  
+
+    showProgress(){
+        this.progress = true;
+    } 
+
+    hideProgress(){
+        this.progress = false;
+    }  
 }

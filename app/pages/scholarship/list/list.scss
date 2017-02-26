@@ -1,0 +1,29 @@
+.scholarshiplist-page{
+    scroll-content{
+        border-top: none !important;        
+
+        ion-list{
+            ion-item{
+                border: none !important;
+                background: none !important;
+
+                ion-label{
+                    font-family: 'PTSans-Regular';
+                }
+
+                p{
+                    font-family: 'PTSans-Regular';
+                    color: $primaryColor;
+                }
+            }
+        }
+    }    
+}
+
+.btn_order{
+    margin: 0;
+    text-transform: none;
+    .button-inner{
+        justify-content: flex-start;
+    }
+}

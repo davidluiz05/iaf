@@ -25,5 +25,7 @@
     .next-btn-container{
         margin-left: 15px;
         margin-right: 15px;
+        position: relative;
+        z-index: 10000;
     }   
 }

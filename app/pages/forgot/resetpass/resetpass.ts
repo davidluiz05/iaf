@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { LoginPage } from '../../login/login';
-import { Alert } from '../../../providers/alert';
-import { Progress } from '../../../providers/loading';
 import { API_URI } from '../../../providers/config';
 
 @Component({
-    templateUrl: 'build/pages/forgot/resetpass/resetpass.html',
-    providers: [Alert, Progress]
+    templateUrl: 'build/pages/forgot/resetpass/resetpass.html'
 })
 
 export class ResetPasswordPage {
     data: {email?: string, password?: string, password_confirmation?: string};
-    constructor(private navCtrl: NavController, private navParams: NavParams, private http: Http, private alert: Alert, private progress: Progress){
+    progress = false;
+
+    constructor(private navCtrl: NavController, private navParams: NavParams, private http: Http, public alertCtrl: AlertController){
         this.data = {
             email: this.navParams.get('email'),
             password: "",
@@ -22,15 +21,35 @@ export class ResetPasswordPage {
     }
 
     doResetPassword(){
-        this.progress.show("");       
-        this.http.post(API_URI + "resetpass", this.data).subscribe(res => {
-            this.progress.dismiss();
+        this.showProgress();      
+        this.http.post(API_URI + "resetpass", this.data).subscribe(res => {   
+            this.hideProgress();         
             if(res.json().status == false){
-                this.alert.show("Reset Password Failed", res.json().error);
+                let alert = this.alertCtrl.create({
+                    title: "Failed",
+                    subTitle: res.json().error,
+                    buttons: ["OK"]
+                });
+                alert.present();
             }else{
-                this.alert.show("Reset Password Success", "Please try to login with new password");
-                this.navCtrl.push(LoginPage);
+                this.navCtrl.setRoot(LoginPage);
             }
+        }, err => {
+            this.hideProgress();
+            let alert = this.alertCtrl.create({
+                title: "Failed",
+                subTitle: "please check internet connection",
+                buttons: ["OK"]
+            });
+            alert.present();
         });        
+    }
+
+    showProgress(){
+        this.progress = true;
+    } 
+
+    hideProgress(){
+        this.progress = false;
     }
 }

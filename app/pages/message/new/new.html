@@ -13,11 +13,13 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content padding overflow-scroll="false" scroll="true" class="newmessage-page">    
+<ion-content padding overflow-scroll="false" scroll="true" class="newmessage-page"> 
+    <!--   
     <ion-item>
         <ion-label>All Applicants</ion-label>
         <ion-checkbox [(ngModel)]="isAll"></ion-checkbox>
     </ion-item>
+    -->
     <ion-list>
         <ion-list-header>
             For
@@ -45,3 +47,8 @@
         </ion-item>
     </ion-list>
 </ion-footer>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

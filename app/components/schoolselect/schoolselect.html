@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">        
+        <ion-title>Your High School</ion-title>
+        <ion-buttons left>
+            <button primary (click)="done()">
+                Done
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="schoolselect-page">
+    <ion-list no-lines>
+        <ion-item *ngFor="let school of schools" (click)="select(school)">
+            {{school.name}}
+            <button clear item-right *ngIf="school==selected">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>   
+    <p primary *ngIf="schools.length==0">There is no high school selected!</p>  
+    <br>
+    <br>
+    <br>
+    <br>
+    <button block primary  (click)="filter()">
+        Search For your high school
+    </button> 
+    <p primary>(Please use this search function to find your high school)</p>
+    <br>
+    <br>
+    <button block primary  (click)="goToAddSchoolPage()">
+        Add your high school
+    </button> 
+    <p primary>
+        (If you could not find your high school using the search function above, please ADD your high school information here)
+    </p>   
+</ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

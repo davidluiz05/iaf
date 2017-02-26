@@ -2,7 +2,7 @@
     <ion-navbar hideBackButton="true">
         <ion-title>Resources</ion-title>
         <ion-buttons right>
-            <button>
+            <button (click)="openMenu()">
                 <ion-icon primary name="menu"></ion-icon>
             </button>
         </ion-buttons>
@@ -10,26 +10,16 @@
 </ion-header>
 <ion-content overflow-scroll="false" scroll="true" class="resource-page">
     <ion-list>
-        <ion-item>
-            <h2 primary>
-                PDF title
-            </h2>
-            <p>Nov 5, 1996</p>
-            <button clear item-right>PDF VIEW</button>
-        </ion-item>
-        <ion-item>
-            <h2>
-                Video File
-            </h2>
-            <p>Nov 5, 1998</p>
-            <button clear item-right>Video PLAY</button>
-        </ion-item>
-        <ion-item>
-            <h2>
-                Audio File
-            </h2>
-            <p>Nov 6, 1999</p>
-            <button clear item-right>Audio PLAY</button>
-        </ion-item>
+        <ion-item *ngFor="let resource of resources">
+            <ion-thumbnail item-left>
+                <img [src]="resource.content_url">
+            </ion-thumbnail>
+            <h2>{{resource.created_at | date: 'MMM d, yyyy'}}</h2>            
+        </ion-item>        
     </ion-list>
 </ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

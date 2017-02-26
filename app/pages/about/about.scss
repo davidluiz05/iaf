@@ -1,0 +1,75 @@
+.about-page{
+    ion-list{
+        ion-item{
+            font-family: 'PTSans-Regular';
+            background: none !important;
+            color: $secondColor;
+            
+            .item-inner{
+                border: none !important;
+
+                h2{
+                    font-family: 'PTSans-Regular';
+                }
+            }
+        }
+
+        ion-item:first-child{
+            border-top: none !important;
+        }
+        ion-item:last-child{
+            border-bottom: none !important;
+        }
+    }
+}
+
+.about-seg1-page{
+    p{
+        font-family: 'PTSans-Regular';
+    }
+
+    ul{
+        li{
+            font-family: 'PTSans-Regular';
+        }
+    }
+}
+
+.about-seg2-page{
+    p{
+        font-family: 'PTSans-Regular';
+    }
+}
+
+.about-seg3-page{
+    p{
+        font-family: 'PTSans-Regular';
+    }
+}
+
+.about-seg4-page{
+    p{
+        font-family: 'PTSans-Regular';
+    }
+
+    ion-list{
+        ion-item{
+            background: none !important;
+
+            .item-inner{
+                border: none !important;
+
+                ion-label{
+                    white-space: inherit;
+                }
+            }
+        }
+
+        ion-item:first-child{
+            border-top: none !important;
+        }
+        ion-item:last-child{
+            border-bottom: none !important;
+        }
+    }
+}

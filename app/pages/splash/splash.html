@@ -1,0 +1,40 @@
+<ion-content scroll="false" class="splash-page">
+    <div class="header-container">
+        <img src="img/logo.png">
+        <div class="backdrop"></div>
+    </div>
+
+    <ion-slides [options]="options">
+        <ion-slide>
+            <center>
+                <div class="img-container">
+                    <img src="img/splash/1.png">
+                </div>
+            </center>
+            <p>
+                Find the best College that suits you
+            </p>
+        </ion-slide>
+        <ion-slide>
+            <center>
+                <img src="img/splash/2.png">
+            </center>
+            <p>
+                Apply for Scholarship
+            </p>
+        </ion-slide>
+        <ion-slide>
+            <center>
+                <img src="img/splash/3.png">
+            </center>
+            <p>
+                Find your dream job!
+            </p>
+        </ion-slide>
+    </ion-slides>
+
+    <div class="footer-container">
+        <button clear (click)="skip()">SKIP INTRODUCTION</button>
+        <div class="backdrop"></div>
+    </div>
+</ion-content>

@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons right>
+            <button primary (click)="openMenu()">
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Applications</ion-title>        
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="application-list-page">
+    <ion-list *ngIf="type==0">
+        <ion-item *ngFor="let application of applications" (click)="goToOtherProfile(application)">
+            <h2 secondary>{{namelist[application.scholarship.availableto]}}</h2>
+            <p>{{application.college.name}}, &nbsp; &nbsp;{{application.created_at | date: 'MMM d, yyyy'}}</p>
+            <ion-badge item-right *ngIf="application.status==2">Pendding</ion-badge>  
+            <ion-badge item-right *ngIf="application.status==7">Accepted</ion-badge>
+            <ion-badge secondary item-right *ngIf="application.status==8">Rejected</ion-badge>          
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="type!=0&&type!=1&&type!=2">
+        <ion-item *ngFor="let application of applications" (click)="goToOtherProfile(application)">
+            <ion-avatar item-left>
+                <img [src]="application.profile_image?application.profile_image:'img/user.png'">
+            </ion-avatar>
+            <h2 secondary>{{application.first_name}} {{application.last_name}}</h2>
+            <p>{{namelist[application.scholarship.availableto]}}</p>         
+            <p>{{application.created_at | date: 'MMM d, yyyy'}}</p>                   
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="type==1">
+        <ion-item *ngFor="let application of applications" (click)="goToOtherProfile(application)">
+            <ion-avatar item-left>
+                <img [src]="application.profile_image?application.profile_image:'img/user.png'">
+            </ion-avatar>
+            <h2 secondary>{{application.first_name}} {{application.last_name}}</h2>
+            <p>{{namelist[application.scholarship.availableto]}}</p>         
+            <p>{{application.created_at | date: 'MMM d, yyyy'}}</p>                   
+        </ion-item>
+    </ion-list>   
+
+    <ion-list *ngIf="type==2">
+        <ion-item *ngFor="let application of applications" (click)="goToOtherProfile(application)">
+            <ion-avatar item-left>
+                <img [src]="application.profile_image?application.profile_image:'img/user.png'">
+            </ion-avatar>
+            <h2 secondary>{{application.first_name}} {{application.last_name}}</h2>
+            <p>{{namelist[application.scholarship.availableto]}}</p>         
+            <p>{{application.created_at | date: 'MMM d, yyyy'}}</p>               
+        </ion-item>
+    </ion-list> 
+</ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

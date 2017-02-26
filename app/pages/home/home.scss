@@ -4,15 +4,21 @@
             background-color: $forthColor !important;
             border: none !important;
 
+            .item-inner{
+                border: none !important;
+            }
+
             ion-label{
                 font-family: 'PTSans-Regular';
                 white-space: inherit !important;
+                color: $primaryColor;
             }
         }
     }
 
     .header-block{
         position: relative;
+        background-color: transparent;
         .block1-back{
             position: absolute;
             width: 150%;
@@ -26,14 +32,14 @@
         }   
 
         img{
-            width: 180px;
+            width: 130px;
             margin-left: 20px;            
-            margin-bottom: 40px;           
+            margin-bottom: 20px;           
         }
     }
 }
 
 .home-navbar{
-    background-color: white !important;
+    background-color: transparent !important;
 }
 

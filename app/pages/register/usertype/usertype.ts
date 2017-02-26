@@ -7,7 +7,7 @@ import { RegisterStep1Page } from '../step1/step1';
 })
 
 export class RegisterUserTypePage {
-    private type: any;    
+    private type: number;    
 
     constructor(private navCtrl: NavController){
         this.type = 0;        

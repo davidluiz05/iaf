@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button (click)="goBack()">
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>{{college.name}}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="college-single-page">
+    <img [src]="college.header_image?college.header_image:'img/cover.png'">
+    <ion-grid>
+        <ion-row>
+            <ion-col width-50>
+                <p secondary>Location</p>
+            </ion-col>
+            <ion-col with-50>
+                <p primary>{{college.location.city}} {{college.location.state}}</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50>
+                <p secondary>Contact</p>
+            </ion-col>
+            <ion-col with-50>
+                <p primary>{{college.maincounselor.email}}</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50>
+                <p secondary>Numbers of scholarship</p>
+            </ion-col>
+            <ion-col with-50>
+                <p primary>{{countscholarships}}</p>
+            </ion-col>
+        </ion-row>        
+    </ion-grid>    
+</ion-content>

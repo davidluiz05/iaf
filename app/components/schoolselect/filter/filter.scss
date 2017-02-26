@@ -1,0 +1,18 @@
+.schoolfilter-page{
+    ion-list{
+        ion-list-header{
+            background: none !important;
+            font-family: 'PTSans-Regular';
+            color: $secondColor;            
+        }
+        ion-item{
+            background: none !important;
+            font-family: 'PTSans-Regular';  
+            color: $primaryColor;          
+        }
+    }
+
+    p{
+        font-family: 'PTSans-Regular';
+    }
+}

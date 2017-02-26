@@ -9,17 +9,22 @@ import { PostPage } from './pages/post/post';
 import { ResourcePage } from './pages/resource/resource';
 import { MagazinePage } from './pages/magazine/magazine';
 import { UserData } from './providers/user-data';
-/** */
+import { Http , Headers, RequestOptions} from '@angular/http';
+import { AccountPage } from './pages/account/account';
+import { ScholarshipListPage } from './pages/scholarship/list/list';
+import { AboutPage } from './pages/about/about';
+import { ApplicationListPage } from './pages/application/list/list';
+import { SplashPage } from './pages/splash/splash';
 
-
+import { AppStorage } from './providers/appstorage';
 @Component({
   templateUrl: 'build/app.html',
-  providers: [UserData]
+  providers: [UserData, AppStorage]
 })
 class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any;
+  rootPage =  SplashPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -28,91 +33,170 @@ class MyApp {
   data: {
     full_name?: string,
     id?: number,
-    profile_image?: string
+    profile_image?: string,
+    type ?: number
   }; 
 
-  constructor(public platform: Platform, public userData: UserData, private events: Events, public menuCtrl: MenuController) {
+  constructor(public platform: Platform, public userData: UserData, public events: Events, public menuCtrl: MenuController, public appStorage: AppStorage) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'MESSAGES', component: MessageListPage },
-      { title: 'APPLICATIONS', component: LoginPage },
-      { title: 'COLLEGES', component: LoginPage },
-      { title: 'SCHOLARSHIPS', component: LoginPage },
-      { title: 'MAGAZINES', component: MagazinePage },
-      { title: 'WEEK IN REVIEW', component: PostPage },
-      { title: 'AR', component: LoginPage },
-      { title: 'RESOURCES', component: ResourcePage },
-      { title: 'ABOUT US', component: LoginPage },
-      { title: 'ACCOUNT', component: LoginPage }     
-    ];
-
+        
     this.profilePage = ProfilePage;    
 
     this.data = {
       full_name: "John",
       id: -1,
-      profile_image: "img/user.png"
+      profile_image: "img/user.png",
+      type: -1
     };
+
+    
+  }
+
+  onresume(){
+    
+  }
+
+  onpause(){
+    console.log("pause event");
+    this.userData.getUserData().then(data => {
+      console.log("Pause event data = " + JSON.stringify(data));
+    })
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();  
+      StatusBar.styleDefault();
       /*
-      var notificationOpenedCallback = function(jsonData) {
-        console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));  
-        alert(JSON.stringify(jsonData));      
-      };
-
       window["plugins"].OneSignal.init("b6a309bd-4266-422e-998d-4735c2e70ce7",
                                     {googleProjectNumber: "489648472734"},
-                                    notificationOpenedCallback);
+                                    (jsonData)=>{                                                                                                            
+                                      this.events.publish('chat:receive', JSON.stringify(jsonData));                             
+                                    });
       
       
-      window["plugins"].OneSignal.enableSound(true);
-      window["plugins"].OneSignal.enableVibrate(true);
-      window["plugins"].OneSignal.enableNotificationsWhenActive(true);    
-      window["plugins"].OneSignal.setSubscription(false);    \
-      */            
+      window["plugins"].OneSignal.enableSound(false);
+      window["plugins"].OneSignal.enableVibrate(false);    
+      window["plugins"].OneSignal.enableNotificationsWhenActive(false);    
+      this.menuCtrl.enable(false); 
+      */
+      document.addEventListener('resume', this.onresume, false);   
+      document.addEventListener('pause', this.onpause); 
     });
 
-    this.userData.hasLoggedIn().then((isLogged) => {     
-      if(isLogged == 'false'){          
-        this.rootPage = LoginPage;
-        this.menuCtrl.enable(false, 'authenticated');          
-      }else{          
-        this.rootPage = HomePage;
+    this.events.subscribe("user:login", (data) => {   
+      console.log("login event");     
+      this.data = data[0];
+      this.menuCtrl.enable(true);
+      
+      if(this.data.type == 0){ //applicant
+        this.pages = [
+          { title: 'DASHBOARD', component: HomePage},
+          { title: 'MESSAGES', component: MessageListPage },
+          { title: 'APPLICATIONS', component: ApplicationListPage },          
+          { title: 'SCHOLARSHIPS', component: ScholarshipListPage },
+          { title: 'MAGAZINES', component: MagazinePage },
+          { title: 'WEEK IN REVIEW', component: PostPage },          
+          { title: 'RESOURCES', component: ResourcePage },
+          { title: 'ABOUT US', component: AboutPage },
+          { title: 'VIDEO', component: AboutPage},
+          { title: 'LOGOUT', component: LoginPage}                      
+        ];
+      }else if(this.data.type == 1){ //college 
+        this.pages = [
+          { title: 'DASHBOARD', component: HomePage},
+          { title: 'MESSAGES', component: MessageListPage },
+          { title: 'APPLICATIONS', component: ApplicationListPage },          
+          { title: 'SCHOLARSHIPS', component: ScholarshipListPage },
+          { title: 'MAGAZINES', component: MagazinePage },
+          { title: 'WEEK IN REVIEW', component: PostPage },          
+          { title: 'RESOURCES', component: ResourcePage },
+          { title: 'ABOUT US', component: AboutPage } ,
+          { title: 'VIDEO', component: AboutPage},
+          { title: 'LOGOUT', component: LoginPage}          
+        ];
+      }else if(this.data.type == 2){ //high school
+         this.pages = [
+          { title: 'DASHBOARD', component: HomePage},
+          { title: 'MESSAGES', component: MessageListPage },
+          { title: 'APPLICATIONS', component: ApplicationListPage },          
+          { title: 'SCHOLARSHIPS', component: ScholarshipListPage },
+          { title: 'MAGAZINES', component: MagazinePage },
+          { title: 'WEEK IN REVIEW', component: PostPage },          
+          { title: 'RESOURCES', component: ResourcePage },
+          { title: 'ABOUT US', component: AboutPage } ,
+          { title: 'VIDEO', component: AboutPage},
+          { title: 'LOGOUT', component: LoginPage}               
+        ];
+      }else if(this.data.type == 3){ //advertiser
+        this.pages = [
+          { title: 'DASHBOARD', component: HomePage},
+          { title: 'MESSAGES', component: MessageListPage },          
+          { title: 'SCHOLARSHIPS', component: ScholarshipListPage },
+          { title: 'MAGAZINES', component: MagazinePage },
+          { title: 'WEEK IN REVIEW', component: PostPage },        
+          { title: 'RESOURCES', component: ResourcePage },
+          { title: 'ABOUT US', component: AboutPage },
+          { title: 'VIDEO', component: AboutPage},
+          { title: 'LOGOUT', component: LoginPage}                
+        ];
+      }else if(this.data.type == 4){ //donor
+         this.pages = [
+          { title: 'DASHBOARD', component: HomePage},
+          { title: 'MESSAGES', component: MessageListPage },          
+          { title: 'SCHOLARSHIPS', component: ScholarshipListPage },
+          { title: 'MAGAZINES', component: MagazinePage },
+          { title: 'WEEK IN REVIEW', component: PostPage },      
+          { title: 'RESOURCES', component: ResourcePage },
+          { title: 'ABOUT US', component: AboutPage },
+          { title: 'VIDEO', component: AboutPage},
+          { title: 'LOGOUT', component: LoginPage}                
+        ];
+      }else if(this.data.type == 5){ //admin
+        this.pages = [
+          { title: 'DASHBOARD', component: HomePage},
+          { title: 'MESSAGES', component: MessageListPage },
+          { title: 'APPLICATIONS', component: ApplicationListPage },          
+          { title: 'SCHOLARSHIPS', component: ScholarshipListPage },
+          { title: 'MAGAZINES', component: MagazinePage },
+          { title: 'WEEK IN REVIEW', component: PostPage },        
+          { title: 'RESOURCES', component: ResourcePage },
+          { title: 'ABOUT US', component: AboutPage },
+          { title: 'ACCOUNTS', component: AccountPage },
+          { title: 'VIDEO', component: AboutPage},
+          { title: 'LOGOUT', component: LoginPage}       
+        ];
       }
     });
 
-    this.events.subscribe("user:login", (data) => {        
-      this.data = data[0];
-      this.menuCtrl.enable(true, "authenticated");
-    });
-
     this.events.subscribe("user:logout",()=>{  
+      console.log("logout event");
       this.data = {
         full_name: "John",
         id: -1,
-        profile_image: "img/user.png"
+        profile_image: "img/user.png",
+        type : -1
       };    
-      this.menuCtrl.enable(false,"authenticated");
+      this.menuCtrl.enable(false);
     });
 
     this.events.subscribe('user:changephoto', (data)=>{
       this.data.profile_image = data[0];
-    });    
+    });
+
+    this.events.subscribe('user:changename', (data)=> {
+      this.data.full_name = data[0];
+    });
   }
   //////////////////////////////////////////////////////////////
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if(page.title == 'LOGOUT'){
+      this.logout();
+    }else{
+      this.nav.setRoot(page.component);
+    }    
   }  
 
   goToProfilePage(){

@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons right>
+            <button primary (click)="openMenu()">
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Colleges</ion-title>        
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="collegs-list-page">
+    <ion-list>
+        <ion-item *ngFor="let college of colleges" (click)="goToSinglePage(college)">
+            <ion-thumbnail item-left>
+                <img [src]="college.header_image?college.header_image: 'img/cover.png'">
+            </ion-thumbnail>
+            <h2>{{college.name}}</h2>    
+            <p>{{college.location.city}}, {{college.location.state}}</p>        
+        </ion-item>
+    </ion-list>
+</ion-content>

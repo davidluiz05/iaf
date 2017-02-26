@@ -1,98 +1,113 @@
 .chat-page{
-    ion-list{
-        ion-item.you{
-            border: none !important;
-            position: relative;
-            background-color: transparent;
+    scroll-content{
+        overflow-y: hidden;
 
-            .item-inner{
-                border-bottom: none !important;
+        .chatbox-container{
+            overflow-y: scroll;
+            height: 100%;
 
-                ion-label{
-                    margin-top: 0px;
-                    margin-bottom: 0px;                   
+            ion-list{
+                margin-bottom: 0 !important;
+                
+                ion-item.you{
+                    border: none !important;
+                    position: relative;
+                    background-color: transparent;
 
-                    p{
-                        padding:10px;
-                        font-family: 'PTSans-Regular';
-                        background-color: $forthColor;
-                        color: $primaryColor;
-                        border-radius: 5px;
+                    .item-inner{
+                        border-bottom: none !important;
+
+                        ion-label{
+                            margin-top: 0px;
+                            margin-bottom: 0px;                   
+
+                            p{
+                                padding:10px;
+                                font-family: 'PTSans-Regular';
+                                background-color: $forthColor;
+                                color: $primaryColor;
+                                border-radius: 5px;
+                                float: left;
+                                white-space: normal;
+                            }
+
+                            p::after{
+                                position: absolute;
+                                width: 0;
+                                height: 0;
+                                display: block;
+                                content: "";
+                                border-top: 20px solid transparent;
+                                border-bottom: 20px solid transparent;
+                                border-left: 20px solid $forthColor;
+                                z-index: -1;    
+                                bottom: -1px;
+                                left: 68px;
+                                transform: rotate(70deg);                   
+                            }                   
+                        }                
                     }
+                }
 
-                    p::after{
-                        position: absolute;
-                        width: 0;
-                        height: 0;
-                        display: block;
-                        content: "";
-                        border-top: 20px solid transparent;
-                        border-bottom: 20px solid transparent;
-                        border-left: 20px solid $forthColor;
-                        z-index: -1;    
-                        bottom: -1px;
-                        left: 68px;
-                        transform: rotate(70deg);                   
-                    }                   
-                }                
+                ion-item-divider.you{
+                    border-bottom: none !important;
+                    color: $primaryColor;
+                    padding-left: 72px;
+                    background-color: transparent;
+                    font-family: 'PTSans-Regular';
+                }
+                
+                ion-item-divider.me{
+                    border-bottom: none !important;
+                    color: $primaryColor;
+                    padding-left: 72px;
+                    background-color: transparent;
+                    font-family: 'PTSans-Regular';
+                    text-align: right;
+                }
+
+                ion-item.me{
+                    border: none !important;
+                    position: relative;
+                    background-color: transparent;
+
+                    .item-inner{
+                        border-bottom: none !important;
+
+                        ion-label{
+                            margin-top: 0px;
+                            margin-bottom: 0px;                   
+
+                            p{
+                                padding:10px;
+                                font-family: 'PTSans-Regular';
+                                background-color: $primaryColor;
+                                color: $forthColor;
+                                border-radius: 5px;
+                                float: right;
+                                white-space: normal;
+                            }
+
+                            p::after{
+                                position: absolute;
+                                width: 0;
+                                height: 0;
+                                display: block;
+                                content: "";
+                                border-top: 20px solid transparent;
+                                border-bottom: 20px solid transparent;
+                                border-left: 20px solid $primaryColor;
+                                z-index: -1;    
+                                bottom: -1px;
+                                right: 18px;
+                                transform: rotate(-250deg);                   
+                            }                   
+                        }                
+                    }
+                }
             }
         }
-
-        ion-item-divider.you{
-            border-bottom: none !important;
-            color: $primaryColor;
-            padding-left: 72px;
-            background-color: transparent;
-            font-family: 'PTSans-Regular';
-        }
-        
-        ion-item-divider.me{
-            border-bottom: none !important;
-            color: $primaryColor;
-            padding-left: 72px;
-            background-color: transparent;
-            font-family: 'PTSans-Regular';
-            text-align: right;
-        }
-
-        ion-item.me{
-            border: none !important;
-            position: relative;
-            background-color: transparent;
-
-            .item-inner{
-                border-bottom: none !important;
-
-                ion-label{
-                    margin-top: 0px;
-                    margin-bottom: 0px;                   
-
-                    p{
-                        padding:10px;
-                        font-family: 'PTSans-Regular';
-                        background-color: $primaryColor;
-                        color: $forthColor;
-                        border-radius: 5px;
-                    }
-
-                    p::after{
-                        position: absolute;
-                        width: 0;
-                        height: 0;
-                        display: block;
-                        content: "";
-                        border-top: 20px solid transparent;
-                        border-bottom: 20px solid transparent;
-                        border-left: 20px solid $primaryColor;
-                        z-index: -1;    
-                        bottom: -1px;
-                        right: 18px;
-                        transform: rotate(-250deg);                   
-                    }                   
-                }                
-            }
-        }
-    }
+    }    
 }
 
 ion-footer{

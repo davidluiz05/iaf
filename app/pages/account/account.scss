@@ -1,0 +1,22 @@
+.account-page{
+    ion-list{
+        p{
+            font-family: 'PTSans-Regular';
+            color: $secondColor;    
+            font-size: 18px;
+            padding-left: 10px;                 
+        }
+
+        ion-item{
+            background-color: transparent !important;
+
+            h2{
+                color: $primaryColor;
+            }
+
+            ion-label{
+                font-family: 'PTSans-Regular';
+            }
+        }
+    }
+}

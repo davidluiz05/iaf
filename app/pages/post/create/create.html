@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-title>Create a post</ion-title>
+        <ion-buttons left>
+            <button (click)="goBack()">
+                <ion-icon  primary name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons right>
+            <button (click)="savePic()">
+                <ion-icon primary name="attach"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="postcreate-page">
+    <form (ngSubmit)="save()">
+    <ion-list>
+        <center *ngIf="data.image_data">
+            <img [src]="data.image_data">
+        </center>
+        <p secondary>Title</p>
+        <ion-item class="app-input-container">
+            <input type="text" [(ngModel)]="data.title" name="title">
+        </ion-item>
+        <p secondary>Description</p>        
+        <textarea [(ngModel)]="data.content" name="content"></textarea>
+    </ion-list>    
+    <button secondary block>
+        Save
+    </button>
+    </form>
+</ion-content>

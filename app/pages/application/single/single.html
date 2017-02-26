@@ -1,0 +1,127 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons left>
+            <button (click)="goBack()">
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="application-single-page" *ngIf="scholarship">
+    <center>
+        <img class="college-logo" [src]="scholarship.header_image?scholarship.header_image:'img/college.png'"/>
+    </center>
+    <p class="college-name">{{scholarship.name}}</p>
+    <p class="college-info">{{scholarship.college.name}} - {{scholarship.college.location.state}} {{scholarship.college.location.city}}</p>
+    <form (ngSubmit)="submit()">
+    <ion-list *ngIf="data">
+        <ion-item class="app-input-container">
+            <input type="text" placeholder="First Name" [(ngModel)]="data.first_name" name="first_name">
+        </ion-item>
+        <br>
+        <ion-item class="app-input-container">
+            <input type="text" placeholder="Midddle Name" [(ngModel)]="data.middle_name" name="middle_name">
+        </ion-item>
+        <br>
+        <ion-item class="app-input-container">
+            <input type="text" placeholder="Last Name" [(ngModel)]="data.last_name" name="last_name">
+        </ion-item>
+        <br>
+        <ion-item class="app-input-container">
+            <input type="text" placeholder="Mailing Address" [(ngModel)]="data.address" name="address">
+        </ion-item>
+        <br>
+        <ion-item class="app-input-container">
+            <input type="text" placeholder="City" [(ngModel)]="data.city" name="city">
+        </ion-item>
+        <br>
+        <ion-item class="app-input-container">
+            <input type="text" placeholder="State" [(ngModel)]="data.state" name="state">
+        </ion-item>
+        <br>
+        <ion-item class="app-input-container">
+            <input type="text" placeholder="Zip Code" [(ngModel)]="data.zip" name="zip">
+        </ion-item>
+        <br>
+        <ion-item class="app-input-container">
+            <input type="text" placeholder="Phone Number" [(ngModel)]="data.phone" name="phone">
+        </ion-item>
+        <br>
+        <ion-item class="app-input-container">
+            <input type="text" placeholder="Email" [(ngModel)]="data.email" name="email">
+        </ion-item>
+        <br>
+        <ion-item class="app-input-container">
+            <input type="text" placeholder="Re-enter Email" [(ngModel)]="data.email_confirmation" name="email_confirmation">
+        </ion-item>
+        <br>
+        <div *ngIf="type==0">
+            <ion-item class="app-input-container">
+                <input type="text" placeholder="Guidance Counselor's Name" [(ngModel)]="data.guidance_counselor" name="guidance_counselor">
+            </ion-item>
+            <br>
+            <ion-item class="app-checkbox-container">
+                <ion-label>Does your graduation date fall between Jan 1, Dec 31</ion-label>
+                <ion-checkbox [(ngModel)]="data.graduation_date_between" name="date.graduation_date_between"></ion-checkbox>
+            </ion-item>
+        </div>        
+        <p *ngIf="type==1">Are you 19 years of age or older?</p>
+        <ion-grid *ngIf="type==1">
+            <ion-row>
+                <ion-col>
+                    <button type="button" block [ngClass]="{'active': (data.is_over==true)}" (click)="toggleIsOver(true)">Yes</button>
+                </ion-col>
+                <ion-col>
+                    <button type="button" block [ngClass]="{'active': (data.is_over==false)}" (click)="toggleIsOver(false)">No</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div *ngIf="type==2">
+            <ion-item class="app-input-container">
+                <select [(ngModel)]="data.service_branch" name="service_branch">
+                    <optgroup label="Branch of service">                            
+                        <option>U.S. Air National Guard</option>
+                        <option>U.S. Army National Guard</option>
+                        <option>U.S. Air Force</option>
+                        <option>U.S. Army</option>
+                        <option>U.S. Coast Guard</option>
+                        <option>U.S. Marine Corps</option>
+                        <option>U.S. Navy</option>
+                    </optgroup>
+                </select>
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <select [(ngModel)]="data.military_status" name="military_status">                                                                            
+                    <option>Active Duty</option>
+                    <option>Reserves</option>
+                    <option>Honorably Discharged</option>                       
+                </select>
+            </ion-item>
+            <br>
+            <ion-item class="app-input-container">
+                <ion-label secondary>Date of discharge</ion-label>
+                <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="data.discharge_date" name="discharge_date"></ion-datetime>
+            </ion-item>
+        </div>
+        <br>
+        <ion-item class="app-checkbox-container">
+            <ion-label>Agree with</ion-label>
+            <ion-checkbox name="check_terms" [(ngModel)]="data.check_terms" name="check_terms"></ion-checkbox>
+            <button item-right secondary clear (click)="goToTermsPage()" type="button">
+                TERMS AND CONDITIONS
+            </button>
+        </ion-item>
+    </ion-list>
+    <br>
+    <button secondary block type="submit">
+        Submit
+    </button>
+    </form>
+</ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

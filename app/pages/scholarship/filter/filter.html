@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-buttons right>
+            <button secondary (click)="apply()">Apply</button>
+        </ion-buttons>
+        <ion-buttons left>
+            <button primary (click)="cancel()">Cancel</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding overflow-scroll="false" scroll="true" class="scholarshipfilter-page">
+    <ion-list>
+        <p secondary>User Type:</p>
+        <ion-item class="app-input-container">
+            <select>
+                <option value="0">High School Student</option>
+                <option value="1">Adult</option>
+                <option value="2">Military</option>
+            </select>
+        </ion-item>
+        <p secondary>State:</p>
+        <ion-item class="app-input-container">
+            <ion-label></ion-label>
+        </ion-item>
+        <p secondary>City:</p>
+        <ion-item class="app-input-container">
+            <ion-label></ion-label>
+        </ion-item>
+        <p secondary>Program:</p>
+        <ion-item class="app-input-container">
+            <select>
+                <option>Program1</option>
+                <option>Program2</option>
+            </select>
+        </ion-item>
+    </ion-list>
+</ion-content>

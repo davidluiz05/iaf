@@ -6,10 +6,7 @@
             </button>
         </ion-buttons>
     </ion-navbar>
-</ion-header>
-<ion-content padding overflow-scroll="false" scroll="true" class="register-step1-page">
-    <form (ngSubmit)="doCreate()">
-    <ion-grid>
+    <ion-grid class="indicator-tab">
         <ion-row>
             <ion-col text-center>
                 <span class="indicator-item" [ngClass]="{'active': step==0}">1</span>
@@ -22,31 +19,78 @@
             </ion-col>
         </ion-row>
     </ion-grid>
-    <br>    
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="register-step1-page">    
+    <form (ngSubmit)="doCreate()">      
     <div class="step-container" *ngIf="step==0">
-        <h1 primary>Your Personal Information</h1>
-        <ion-list>
+        <!-- if applicant -->
+        <h1 primary *ngIf="data.type==0">Your Personal Information</h1>        
+        <ion-list *ngIf="data.type==0">
+            <p secondary>Applicant Type</p>
             <ion-item class="app-input-container">                
-                <select [(ngModel)]="data.applicant_type" name="type">
-                    <optgroup label="Applicant Type">
-                        <option value="0">High School Student</option>
-                        <option value="1">Adult</option>
-                        <option value="2">Military</option>
-                    </optgroup>
+                <select [(ngModel)]="data.applicant_type" name="type">                    
+                    <option value="0">High School Student</option>
+                    <option value="1">Adult</option>
+                    <option value="2">Military</option>                   
                 </select>
-            </ion-item>
-            <br>
-            <ion-item class="app-input-container">
-                <input type="text" placeholder="First Name" [(ngModel)]="data.first_name" name="first_name">
-            </ion-item>
-            <br>
-            <ion-item class="app-input-container">
-                <input type="text" placeholder="Middel Name" [(ngModel)]="data.middle_name" name="middle_name">
-            </ion-item>
-            <br>
-            <ion-item class="app-input-container">
-                <input type="text" placeholder="Last Name" [(ngModel)]="data.last_name" name="last_name">
             </ion-item>            
+            <p secondary>First Name</p>
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.first_name" name="first_name">
+            </ion-item>
+            <p secondary>Middle Name</p>
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.middle_name" name="middle_name">
+            </ion-item>
+            <p secondary>Last Name</p>
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.last_name" name="last_name">
+            </ion-item>          
+        </ion-list>
+        <!-- if College/High School-->
+        <h1 primary *ngIf="data.type==1">College Information</h1>
+        <h1 primary *ngIf="data.type==2">High School Information</h1>
+        <ion-list *ngIf="data.type==1 || data.type==2"> 
+            <p secondary>School Name</p> 
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.school_name" name="school_name">
+            </ion-item>
+            <p secondary>Job Title</p>
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.job_title" name="job_title">
+            </ion-item>
+            <p secondary>Contact First Name</p>          
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.first_name" name="first_name">
+            </ion-item>
+            <p secondary>Contact Last Name</p>            
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.last_name" name="last_name">
+            </ion-item>
+            <p secondary>Phone Number</p>
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.phone" name="phone">
+            </ion-item>            
+        </ion-list>
+        <!--  if Advertiser/Donor -->
+        <h1 primary *ngIf="data.type==3 || data.type==4">Your Personal Information</h1>
+        <ion-list *ngIf="data.type==3 || data.type==4">
+            <p secondary>Company Name</p>
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.company_name" name="company_name">
+            </ion-item>
+            <p secondary>First Name</p>
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.first_name" name="first_name">
+            </ion-item>
+            <p secondary>Last Name</p>           
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.last_name" name="last_name">
+            </ion-item>
+            <p secondary>Phone Number</p>
+            <ion-item class="app-input-container">
+                <input type="text" [(ngModel)]="data.phone" name="phone">
+            </ion-item>
         </ion-list>
         <br>
         <button block secondary (click)="nextStep()">
@@ -55,28 +99,25 @@
     </div>
 
     <div class="step-container" *ngIf="step==1">
-        <h1 primary>Your Location</h1>
-        <ion-list>            
-            <ion-item class="app-input-container">
-                <input type="text" placeholder="State" [(ngModel)]="data.state" name="state">
+        <h1 primary>Location Information</h1>
+        <ion-list>          
+            <p secondary>State</p>  
+            <ion-item class="app-input-container" (click)="showstatedlg()">                
+                <ion-label>{{data.state}}</ion-label>
             </ion-item>
-            <br>
+            <p secondary>City</p>
             <ion-item class="app-input-container">
-                <input type="text" placeholder="City" [(ngModel)]="data.city" name="city">
+                <input type="city" [(ngModel)]="data.city" name="city">
             </ion-item>
-            <br>
+            <p secondary>Zip</p>
             <ion-item class="app-input-container">
-                <input type="text" placeholder="Zip" [(ngModel)]="data.zip" name="zip">
+                <input type="number" [(ngModel)]="data.zip" name="zip">
             </ion-item>
-            <br>
+            <p secondary>Mailing Address Line</p>
             <ion-item class="app-input-container">
                 <ion-icon primary name="md-navigate" item-right></ion-icon>
-                <input type="text" placeholder="Mailing address line" [(ngModel)]="data.address" name="address">
-            </ion-item>
-            <br>
-            <ion-item class="app-input-container">
-                <input type="text" placeholder="Phone" [(ngModel)]="data.phone" name="phone">
-            </ion-item>
+                <input type="text" [(ngModel)]="data.address" name="address">
+            </ion-item>            
         </ion-list>
         <br>
         <button block secondary (click)="nextStep()">
@@ -85,23 +126,24 @@
     </div>
 
     <div class="step-container" *ngIf="step==2">
-        <h1 primary>Your Login Information</h1>
-        <ion-list>            
+        <h1 primary>Login Information</h1>
+        <ion-list> 
+            <p secondary>Email</p>           
             <ion-item class="app-input-container">
-                <input type="text" placeholder="Email address" [(ngModel)]="data.email" name="email" name="email">
+                <input type="email" [(ngModel)]="data.email" name="email" name="email">
             </ion-item>
-            <br>
+            <p secondary>Verify Email</p>
             <ion-item class="app-input-container">
-                <input type="text" placeholder="Verify Email address" [(ngModel)]="data.email_confirmation" name="email_confirmation">
+                <input type="email" [(ngModel)]="data.email_confirmation" name="email_confirmation">
             </ion-item>
-            <br>
-            <ion-item class="app-input-container">
-                <input type="password" placeholder="Password" [(ngModel)]="data.password" name="password">
-            </ion-item>
-            <br>
-            <ion-item class="app-input-container">
-                <input type="password" placeholder="Verify password" [(ngModel)]="data.password_confirmation" name="password_confirmation">
-            </ion-item>
+            <p secondary>Password</p>
+            <show-hide-input>
+                <input type="password" #showhideinput [(ngModel)]="data.password" name="password">
+            </show-hide-input>
+            <p secondary>Verify Password</p>
+            <show-hide-input>
+                <input type="password" #showhideinput [(ngModel)]="data.password_confirmation" name="password_confirmation">
+            </show-hide-input>            
             <br>
             <ion-item class="app-checkbox-container">
                 <ion-label>Agree with</ion-label>
@@ -116,5 +158,10 @@
             Create an account
         </button>        
     </div>
-    </form>
+    </form>    
 </ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

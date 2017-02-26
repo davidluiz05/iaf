@@ -1,43 +1,37 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { ViewController } from 'ionic-angular';
-import {  LoginPage } from '../../login/login';
-import { UserData } from '../../../providers/user-data';
 import { Http } from '@angular/http';
-import { Progress } from '../../../providers/loading';
-import { Alert } from '../../../providers/alert';
+import { NavController, ViewController, AlertController } from 'ionic-angular';
+import { LoginPage } from '../../login/login';
+import { UserData } from '../../../providers/user-data';
 import { API_URI } from '../../../providers/config';
 
 @Component({
     templateUrl: 'build/pages/profile/popmenu/popmenu.html',
-    providers: [UserData, Alert, Progress]
+    providers: [UserData]
 })
 
 export class ProfilePopMenu {
-    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public userData: UserData, public http: Http, public alert: Alert, public progress: Progress){}
+    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public userData: UserData, public http: Http, public alertCtrl: AlertController){}
 
-    delete(){
-        this.progress.show("");
-        this.userData.getUserID().then((id) => {            
-            this.http.post(API_URI + "changestatus", {
-                id: id,
-                status: 2
+    delete(){        
+        this.userData.getUserData().then((data) => {       
+            let d = JSON.parse(data);     
+            this.http.post(API_URI + "deleteaccount", {
+                id: d.id
             }).subscribe(res => {
-                if(res.json().status == false){
-                    this.alert.show("Deleting account",res.json().error);
-                }else{
-                    this.alert.show("Success", "Just deleted your account successfully");
-                    this.userData.logout();
+                if(res.json().status == false){                   
+                    let alert = this.alertCtrl.create({
+                        title: "Account Deleting Failed",
+                        subTitle: res.json().error,
+                        buttons: ["OK"]
+                    });
+                    alert.present();
+                }else{                                       
                     this.viewCtrl.dismiss();
+                    this.userData.logout();
                     this.navCtrl.setRoot(LoginPage);
                 }
             })
         });
-    }
-
-    signout(){
-        this.viewCtrl.dismiss();
-        this.userData.logout();        
-        this.navCtrl.setRoot(LoginPage);
     }
 }

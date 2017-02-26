@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-title>Scholarships</ion-title>        
+        <ion-buttons right>
+            <button (click)="openMenu()">
+                <ion-icon primary name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-grid class="custom-tab">
+        <ion-row>
+            <ion-col>
+                <button block [ngClass]="{'active': (step==0)}" (click)="settab(0)">
+                    High School<br>Student
+                </button>
+            </ion-col>
+            <ion-col>
+                <button block [ngClass]="{'active': (step==1)}" (click)="settab(1)">
+                    Adult<br>Student
+                </button>
+            </ion-col>
+            <ion-col>
+                <button block [ngClass]="{'active': (step==2)}" (click)="settab(2)">
+                    Military<br>Student
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-searchbar (ionInput)="search()" [(ngModel)]="tag"></ion-searchbar>    
+    <button clear class="btn_order" ion-button icon-right (click)="order($event)">
+        Order By: {{orderCandidates[orderValue]}} 
+        <ion-icon name="md-arrow-dropdown"></ion-icon>
+    </button>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="scholarshiplist-page">
+    <ion-list no-lines *ngIf="step==0">
+        <div *ngFor="let scholarship of scholarships | searchName: tag">
+        <ion-item *ngIf="scholarship.availableto==0" (click)="goToDetailPage(scholarship)">
+            <ion-avatar item-left>
+                <img [src]="scholarship.college.header_image?scholarship.college.header_image:'img/college.png'">
+            </ion-avatar>
+            <h2 secondary>{{namelist[scholarship.availableto]}}</h2>
+            <p>College: {{scholarship.college.name}}</p>
+            <p>State: {{scholarship.college.location.state}}</p>  
+            <p>Status: {{statusCandidates[scholarship.status]}}</p>          
+        </ion-item>
+        </div>
+    </ion-list>  
+    <ion-list no-lines *ngIf="step==1">
+        <div *ngFor="let scholarship of scholarships | searchName: tag">
+        <ion-item *ngIf="scholarship.availableto==1" (click)="goToDetailPage(scholarship)">
+            <ion-avatar item-left>
+                <img [src]="scholarship.college.header_image?scholarship.college.header_image:'img/college.png'">
+            </ion-avatar>
+            <h2 secondary>{{namelist[scholarship.availableto]}}</h2>
+            <p>College: {{scholarship.college.name}}</p>
+            <p>State: {{scholarship.college.location.state}}</p>  
+            <p>Status: {{statusCandidates[scholarship.status]}}</p>          
+        </ion-item>
+        </div>
+    </ion-list>
+    <ion-list no-lines *ngIf="step==2">
+        <div *ngFor="let scholarship of scholarships | searchName: tag">
+        <ion-item *ngIf="scholarship.availableto==2" (click)="goToDetailPage(scholarship)">
+            <ion-avatar item-left>
+                <img [src]="scholarship.college.header_image?scholarship.college.header_image:'img/college.png'">
+            </ion-avatar>
+            <h2 secondary>{{namelist[scholarship.availableto]}}</h2>
+            <p>College: {{scholarship.college.name}}</p>
+            <p>State: {{scholarship.college.location.state}}</p>  
+            <p>Status: {{statusCandidates[scholarship.status]}}</p>          
+        </ion-item>
+        </div>
+    </ion-list>       
+</ion-content>

@@ -1,22 +1,21 @@
 import { Component } from '@angular/core';
-import { NavController, Events, NavParams } from 'ionic-angular';
-import { MessageFilterPage } from '../filter/filter';
 import { Http } from '@angular/http';
-import { Alert } from '../../../providers/alert';
-import { Progress } from '../../../providers/loading';
+import { NavController, Events, NavParams, AlertController } from 'ionic-angular';
 import { UserData } from '../../../providers/user-data';
 import { API_URI } from '../../../providers/config';
 
 @Component({
     templateUrl: 'build/pages/message/adduser/adduser.html',
-    providers: [UserData, Alert, Progress]
+    providers: [UserData]
 })
 
 export class MessageAddUserPage {    
-    private users: Array<any>;
-    private idlist: Array<number>;
-    private issearch: boolean;
-    constructor(public navCtrl: NavController, public userData: UserData, public alert: Alert, public progress: Progress, private http: Http, public events: Events, public navParams: NavParams){
+    users: Array<any>;
+    idlist: Array<number>;
+    issearch: boolean;
+    progress = false;
+
+    constructor(public navCtrl: NavController, public userData: UserData, private http: Http, public events: Events, public navParams: NavParams, public alertCtrl: AlertController){
         this.issearch = false;
         this.idlist = this.navParams.get("idlist");
     }
@@ -26,25 +25,41 @@ export class MessageAddUserPage {
     }
 
     goToFilterPage(){
-        this.navCtrl.push(MessageFilterPage);
+        
     }
 
     searchuser(event: any){        
         if(this.issearch == false){
-            this.userData.getUserID().then(id => {
+            this.userData.getUserData().then(data => {
+                let d = JSON.parse(data);
                 this.issearch = true;
                 let val = event.target.value;
+                this.showProgress();
                 this.http.post(API_URI + "searchuser", {
                     tag: val,
-                    id: id,
+                    id: d.id,
                     candidates: this.idlist
                 }).subscribe(res => {
+                    this.hideProgress();
                     this.issearch = false;
                     if(res.json().status == false){
-                        this.alert.show("Failed", res.json().error);
+                        let alert = this.alertCtrl.create({
+                            title: "Failed",
+                            subTitle: res.json().error,
+                            buttons: ["OK"]
+                        });
+                        alert.present();
                     }else{
                         this.users = res.json().users;                    
                     }
+                }, err => {
+                    this.hideProgress();
+                    let alert =  this.alertCtrl.create({
+                        title: "Failed",
+                        subTitle: "please check internet connection",
+                        buttons: ["OK"]
+                    });
+                    alert.present();
                 });
             });
         }        
@@ -59,4 +74,11 @@ export class MessageAddUserPage {
         this.users.splice(start, 1);       
     }
 
+    showProgress(){
+        this.progress = true;
+    } 
+
+    hideProgress(){
+        this.progress = false;
+    }
 }

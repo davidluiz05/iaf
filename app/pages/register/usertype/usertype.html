@@ -23,14 +23,14 @@
             <ion-icon light name="checkmark" item-left></ion-icon>
             <ion-label>I am a High School Counselor</ion-label>
         </ion-item>
-        <ion-item [ngClass]="{'active': type==3}" (click)="setType(3)">
-            <ion-icon light name="checkmark" item-left></ion-icon>
-            <ion-label>I am a Donor</ion-label>
-        </ion-item>
         <ion-item [ngClass]="{'active': type==4}" (click)="setType(4)">
             <ion-icon light name="checkmark" item-left></ion-icon>
             <ion-label>I am an Advertiser</ion-label>
         </ion-item>
+        <ion-item [ngClass]="{'active': type==3}" (click)="setType(3)">
+            <ion-icon light name="checkmark" item-left></ion-icon>
+            <ion-label>I am a Donor</ion-label>
+        </ion-item>        
     </ion-list>
     <br><br><br>
     <div class="next-btn-container">

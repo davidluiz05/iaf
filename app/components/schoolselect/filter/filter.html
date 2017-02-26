@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <ion-title></ion-title>
+        <ion-buttons right>
+            <button secondary (click)="apply()">
+                Apply
+            </button>
+        </ion-buttons>
+        <ion-buttons left>
+            <button primary (click)="cancel()">
+                Cancel
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding overflow-scroll="false" scroll="true" class="schoolfilter-page">    
+    <p secondary>Please select the State and City of your High School</p>
+    <ion-list no-lines>        
+        <ion-list-header>
+           STATE
+           <button round item-right clear secondary (click)="openStatesModal()">
+               <ion-icon name="ios-add"></ion-icon>               
+           </button>
+        </ion-list-header>
+        <ion-item *ngFor="let state of states">
+            <ion-icon name="ios-pin" item-left></ion-icon>
+            {{state}}
+            <ion-icon name="ios-close" item-right (click)="deletestate(state)"></ion-icon>
+        </ion-item> 
+        <ion-item *ngIf="states.length==0">
+            <ion-label>There is no state selected.</ion-label>
+        </ion-item>       
+    </ion-list>
+    <ion-list no-lines>        
+        <ion-list-header>
+           CITY
+           <button round item-right clear secondary (click)="openCitiesModal()">
+               <ion-icon name="ios-add"></ion-icon>               
+           </button>
+        </ion-list-header>
+        <ion-item *ngFor="let city of cities">
+            <ion-icon name="ios-pin" item-left></ion-icon>
+            {{city}}
+            <ion-icon name="ios-close" item-right (click)="deletecity(city)"></ion-icon>
+        </ion-item> 
+        <ion-item *ngIf="cities.length==0">
+            <ion-label>There is no city selected.</ion-label>
+        </ion-item>        
+    </ion-list>
+</ion-content>

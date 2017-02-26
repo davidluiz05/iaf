@@ -1,0 +1,75 @@
+.servey-page{
+    p.note{
+        font-family: 'PTSans-Regular';
+        color: black;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    p.note1{
+        font-family: 'PTSans-Bold';
+        color: $primaryColor;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .iaf-title{
+        font-family: 'PTSans-Bold';
+        color: $secondColor;
+        font-size: 23px;
+        text-align: center;
+    }
+
+    .step-container{
+        margin-top: 40px;       
+
+        ion-list{
+            ion-item{
+                background: transparent;
+                border: none;
+
+                ion-icon{
+                    color: transparent;
+                }
+
+                .item-inner{
+                    border: none;
+                    color: black;
+                    font-family: 'PTSans-Regular';
+                    text-align: center;
+
+                    ion-label{
+                        white-space: normal;
+                    }
+                }
+            }
+
+            ion-item.active{
+                background: $secondColor;
+                ion-icon{
+                    color: white;
+                }
+
+                .item-inner{
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .step-control-container{
+        margin-top: 40px;
+        .left-btn{
+            float: left;
+            background: $secondColor;
+            color: white;
+        }
+
+
+        .right-btn{
+            float: right;
+            background: $secondColor;
+            color: white;
+        }
+    }
+}

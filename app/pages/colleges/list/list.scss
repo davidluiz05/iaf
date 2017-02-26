@@ -1,0 +1,23 @@
+.collegs-list-page{
+    scroll-content{
+        border-top: none !important;
+
+        ion-list{
+            ion-item{
+                border: none !important;
+                background: none !important;
+
+                h2{
+                    font-family: 'PTSans-Regular';
+                }
+
+                ion-note {
+                    font-size: 12px;
+                    align-self: flex-start;
+                    margin-top: 14px;
+                    font-family: 'PTSans-Regular';
+                }
+            }
+        }
+    }
+}

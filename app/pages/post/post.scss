@@ -1,7 +1,35 @@
 .post-page{
-     ion-list{
-         ion-item{
-             border: none !important;
-         }
-     }
+    scroll-content{
+        border-top: none !important;
+
+        h2, p{
+            font-family: 'PTSans-Regular';
+        }
+
+        h2{
+            font-size: 18px;
+        }
+
+        p{
+            font-size: 15px;
+        }
+
+        ion-list{
+            ion-item{
+                border: none !important;
+                background: none !important;   
+
+                .item-inner{
+                    border-bottom: none !important;
+                }            
+
+                ion-note {
+                    font-size: 12px;
+                    align-self: flex-start;
+                    margin-top: 14px;
+                    font-family: 'PTSans-Regular';
+                }
+            }
+        }
+    }     
 }

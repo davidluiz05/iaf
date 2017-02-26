@@ -1,11 +1,3 @@
-// http://ionicframework.com/docs/v2/theming/
-
-
-// App Shared Imports
-// --------------------------------------------------
-// These are the imports which make up the design of this app.
-// By default each design mode includes these shared imports.
-// App Shared Sass variables belong in app.variables.scss.
 @font-face{
     font-family: 'PTSans-Regular';
     src: url(../fonts/PT_Sans-Narrow-Web-Regular.ttf);
@@ -26,6 +18,10 @@ ion-title{
          font-family: 'PTSans-Regular';
          color: $primaryColor;
     }    
+}
+
+ion-navbar{
+    background: transparent !important;
 }
 
 ion-content{
@@ -61,6 +57,10 @@ ion-list{
                 color: $secondColor !important;
                 font-family: 'PTSans-Regular';
             }
+
+            ion-label{
+                font-family: 'PTSans-Regular';                
+            }
         }        
     }
 
@@ -72,7 +72,8 @@ ion-list{
         .item-inner{
             ion-label{
                 font-family: 'PTSans-Regular';
-                color: $primaryColor;
+                color: $primaryColor;                
+                white-space: inherit;
                 text-align: right;
             }
 
@@ -113,8 +114,8 @@ ion-list{
 
 //menu
 .sidemenu-header{
-    padding-top: 20px;
-    padding-bottom: 20px;
+    overflow: none !important;
+    background-color: $fifthColor !important;
 
     img{
         width: 100px;
@@ -125,39 +126,45 @@ ion-list{
     }
 
     h1{
+        height: 100px;
         line-height: 100px;
         margin-left: 120px;
         font-family: 'PTSans-Regular';
         color: $primaryColor !important;
+        white-space: nowrap;
     }
 }
 
 .sidemenu-content{
+    background-color: $fifthColor !important;
     ion-list{
         margin: 0 !important;
         
         button{
-            font-family: 'PTSans-Regular';
-            background-color: $forthColor !important;
+            font-family: 'PTSans-Regular'; 
+            background-color: $fifthColor !important;
+            color: $primaryColor;    
 
             .item-inner{
                 border: none !important;
             }
         }
 
-    }
-}
+        button.activated{
+            background-color: $primaryColor !important;
+            color: white;
+        }
 
-.sidemenu-footer{
-    ion-list{
-        margin: 0 !important;
-
-        button{
+        button:first-child{
             border: none !important;
         }
+
+        button:last-child{
+            border: none !important;
+        }
+
     }
 }
-
 
 //alert customization
 .alert-head{
@@ -172,22 +179,118 @@ ion-list{
     }
 }
 
+ion-header{
+    ion-buttons{
+        button{
+            font-family: 'PTSans-Regular';
+        }
+    }
+
+    ion-grid.indicator-tab{
+        ion-row{
+            ion-col{
+                .indicator-item{
+                    border-radius: 20px;
+                    padding: 10px 16px;                   
+                    color: $primaryColor;     
+                    font-size: 18px;               
+                }
+
+                .indicator-item.active{
+                    background-color: $secondColor;
+                    color: white;
+                }
+            }
+        }
+    }
+
+    ion-grid.custom-tab{
+        padding: 0px;
+
+        ion-row{
+            ion-col{
+                padding: 0 !important;
+
+                button{
+                    border-radius: 0 !important;
+                    background: $forthColor !important;
+                    font-family: 'PTSans-Regular';
+                    color: $primaryColor !important;
+                    margin: 0;
+                } 
+
+                button.active{
+                    background: $secondColor !important;
+                    font-family: 'PTSans-Regular';
+                    color: white !important;
+                }                  
+            }
+        }
+    }
+}
+
+//loading
+
+.progress-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    left: 0;
+    top: 0;
+
+    ion-spinner{
+        position: absolute;
+        z-index: 10;
+        width: 50px;
+        height: 50px;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        background: rgba(0,0,0,0.2);
+    }
+}
+
+.hidden{
+    display: none !important;
+}
+
+
+@import "../pages/splash/splash";
 @import "../pages/login/login";
 @import "../pages/forgot/sendcode/sendcode";
 @import "../pages/forgot/verifycode/verifycode";
 @import "../pages/register/usertype/usertype";
 @import "../pages/register/step1/step1";
-@import "../pages/register/step2/step2";
 @import "../pages/home/home";
 @import "../pages/profile/profile";
 @import "../pages/profile/editprofile/editprofile";
+@import "../pages/profile/letter/letter";
 @import "../pages/message/list/list";
 @import "../pages/message/list/morepop/morepop";
 @import "../pages/message/chat/chat";
 @import "../pages/message/new/new";
 @import "../pages/message/adduser/adduser";
-@import "../pages/message/filter/filter";
 @import "../pages/post/post";
+@import "../pages/post/create/create";
 @import "../pages/resource/resource";
 @import "../pages/magazine/magazine";
+@import "../pages/magazine/create/create";
 @import "../pages/terms/terms";
+@import "../pages/account/account";
+@import "../pages/scholarship/list/list";
+@import "../pages/scholarship/single/single";
+@import "../pages/scholarship/filter/filter";
+@import "../pages/about/about";
+@import "../pages/application/single/single";
+@import "../pages/application/list/list";
+@import "../pages/application/servey/servey";
+@import "../pages/colleges/list/list";
+@import "../pages/colleges/single/single";
+@import "../components/schoolselect/schoolselect";
+@import "../components/schoolselect/filter/filter";
+@import "../components/statesmodal/statesmodal";
+@import "../components/citiesmodal/citiesmodal";
+@import "../components/addschool/addschool";

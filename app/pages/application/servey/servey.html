@@ -1,0 +1,28 @@
+<ion-content padding overflow-scroll="false" scroll="true" class="servey-page">
+    <p class="note">You are on your way. Please complete the following survey to submit your Imagine America ASEP application.</p>    
+    <h2 class="iaf-title">Imagine America Foundation</h2>
+    
+    <div class="step-container" *ngFor="let item of data; let i = index">
+        <div *ngIf="step==i">
+            <p class="note1">{{item.q}}</p>
+            <ion-list>            
+                <ion-item *ngFor="let a of item.a; let j = index;" (click)="setval(i,j)"  [ngClass]="{'active': (answers[i]==j)}">                
+                   {{a}}
+                </ion-item>         
+            </ion-list>
+        </div>
+    </div>
+    <div class="step-control-container">
+        <button class="left-btn" *ngIf="step!=0" (click)="prev()">
+            Prev
+        </button>
+        <button class="right-btn" (click)="next()">
+            Next
+        </button>
+    </div>
+</ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

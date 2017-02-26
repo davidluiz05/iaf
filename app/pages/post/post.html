@@ -2,21 +2,35 @@
     <ion-navbar hideBackButton="true">
         <ion-title>Week in review</ion-title>
         <ion-buttons right>
-            <button>
+            <button (click)="openMenu()">
                 <ion-icon primary name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons left *ngIf="canCreate">
+            <button (click)="create()">
+                <ion-icon primary name="add"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content overflow-scroll="false" scroll="true" class="post-page">    
-    <ion-list>
-        <ion-item>
+<ion-content overflow-scroll="false" scroll="true" class="post-page">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+            pullingIcon="arrow-dropdown"            
+            refreshingSpinner="ios"            
+        ></ion-refresher-content>       
+    </ion-refresher>    
+    <ion-list [virtualScroll]="posts">
+        <ion-item *virtualItem="let post" (click)="goToSinglePage(post)">
             <ion-thumbnail item-left>
-                <img src="img/user.png">
-            </ion-thumbnail>
-            <h2 primary>My Neighor Totoro</h2>
-            <p>That is content of sample data.</p>
-            <button clear item-right>View</button>
+                <img [src]="post.image_url">
+            </ion-thumbnail>            
+            <h2 primary>{{post.title}}</h2>
+            <p>{{post.content}}</p>
+            <ion-note item-right>{{post.updated_at | date: 'MMM d'}}</ion-note>
         </ion-item>
     </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="enableMore">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

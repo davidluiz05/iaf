@@ -9,22 +9,22 @@
         <ion-list>
             <ion-item class="app-input-container">
                 <ion-icon primary name="person" item-left></ion-icon>                
-                <input type="text" placeholder="USERNAME" [(ngModel)]="loginData.email" name="email" autocapitalize="off">
+                <input type="text" placeholder="USERNAME" [(ngModel)]="loginData.email" name="email">
             </ion-item>
-            <br>
+            <br>            
             <ion-item class="app-input-container">
                 <ion-icon primary name="key" item-left></ion-icon>                
-                <input type="password" placeholder="PASSWORD" [(ngModel)]="loginData.password" name="password">
-            </ion-item>
+                <input type="password" placeholder="PASSWORD" [(ngModel)]="loginData.password" name="password">                        
+            </ion-item>            
         </ion-list>
     </div>
     <div class="block-3">
         <div class="block3-back"></div>        
         <div class="left-btns-container">
-            <button primary [navPush]="registerPage">
+            <button type="button" primary (click)="create()">
                 CREATE AN ACCOUNT
             </button>           
-            <button primary [navPush]="forgotPage">
+            <button type="button" primary (click)="forgot()">
                 FORGOT PASSWORD
             </button>
         </div>
@@ -36,3 +36,8 @@
     </div>
     </form>
 </ion-content>
+
+<!-- Progress -->
+<div class="progress-container" [ngClass]="{'hidden': (progress==false)}">    
+    <ion-spinner></ion-spinner>
+</div>

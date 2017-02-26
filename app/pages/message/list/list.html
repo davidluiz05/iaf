@@ -24,7 +24,7 @@
                     <img src="img/user.png">
                 </ion-avatar>
                 <p item-right>{{message.created_at | date:'H:m a'}}</p>
-                <h2 secondary>{{message.first_name}} {{message.last_name}}</h2>                
+                <h2 secondary class="unread_message">{{message.sender.first_name}} {{message.sender.last_name}}</h2>                
                 <p>That is sample</p>
             </ion-item>
             <ion-item-options side="right">
